@@ -42,7 +42,3 @@ Structify is a powerful, interactive Data Structures and Algorithms (DSA) visual
 - [GitHub](https://github.com/DarshanPawar17)
 - [LinkedIn](https://www.linkedin.com/in/darshan-jagdish-pawar-9b9701298)
 - [LeetCode](https://leetcode.com/u/Darshan_Pawar_17/)
-
-## 📄 License
-
-This project is open-source and available under the [MIT License](LICENSE).
