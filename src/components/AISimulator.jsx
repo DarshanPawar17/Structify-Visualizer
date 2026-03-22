@@ -31,10 +31,10 @@ const AISimulator = () => {
 
         try {
             const apiKey = import.meta.env.VITE_GEMINI_API_KEY;
-            const model = import.meta.env.VITE_GEMINI_MODEL || "gemini-2.5-flash";
+            const model = import.meta.env.VITE_GEMINI_MODEL || "gemini-1.5-flash"; // More stable version
             
             const response = await fetch(
-                `https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent?key=${apiKey}`,
+                `https://generativelanguage.googleapis.com/v1/models/${model}:generateContent?key=${apiKey}`,
                 {
                     method: "POST",
                     headers: { "Content-Type": "application/json" },
