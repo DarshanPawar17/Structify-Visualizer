@@ -1,6 +1,7 @@
 import React, { useState, useRef, useEffect } from 'react';
 import Navbar from '../components/Navbar';
 import ReactMarkdown from 'react-markdown';
+import ErrorBoundary from '../components/ui/ErrorBoundary';
 import { handleInsert, handleDelete, handleSearch, handleTraversal, binaryTree } from '../utils/BinaryTree';
 import { gsap } from 'gsap';
 
@@ -38,6 +39,7 @@ function BinaryTreeVisualizer() {
     const [questionInput, setQuestionInput] = useState("");
     const [isLoading, setIsLoading] = useState(false);
     const [selectedOperation, setSelectedOperation] = useState("treeOp");
+    const [traversalSequence, setTraversalSequence] = useState([]);
 
     // refs
     const messageBoxRef = useRef(null);
@@ -92,6 +94,12 @@ function BinaryTreeVisualizer() {
     const handleAction = async (actionType) => {
         const value = String(inputValue).trim();
         const hisNum = historyNum;
+        
+        // Reset sequence on most operations
+        if (['insert', 'delete', 'search'].includes(actionType)) {
+            setTraversalSequence([]);
+        }
+
         setHistoryNum(prev => prev + 1);
 
         switch (actionType) {
@@ -111,7 +119,8 @@ function BinaryTreeVisualizer() {
             case 'preorder':
             case 'postorder':
             case 'levelorder':
-                handleTraversal(treeVisAreaRef.current, actionType, setHistoryList, hisNum, displayMessage);
+                const seq = await handleTraversal(treeVisAreaRef.current, actionType, setHistoryList, hisNum, displayMessage);
+                setTraversalSequence(seq);
                 break;
             default:
                 return;
@@ -143,11 +152,13 @@ function BinaryTreeVisualizer() {
             });
 
             if (!response.ok) {
-                throw new Error(`API Error: ${response.status}`);
+                const errorData = await response.json().catch(() => ({}));
+                const errorMessage = errorData.error?.message || `API Error: ${response.status}`;
+                throw new Error(errorMessage);
             }
             
             const data = await response.json();
-            const answerText = data.candidates?.[0]?.content?.parts?.[0]?.text || "No response received.";
+            const answerText = data.candidates?.[0]?.content?.parts?.[0]?.text || "I apologize, but I couldn't generate a response. Please try again.";
             
             setChatHistory([
                 { role: "user", text: questionInput },
@@ -306,6 +317,29 @@ function BinaryTreeVisualizer() {
                                     </div>
                                 </div>
                             </div>
+                            
+                            {/* Traversal Sequence Display */}
+                            {traversalSequence.length > 0 && (
+                                <div className="mt-8 pt-8 border-t border-[#EBEBEB] animate-in fade-in slide-in-from-bottom-4 duration-700">
+                                    <div className="flex justify-between items-center mb-6">
+                                        <span className="text-[0.65rem] font-bold tracking-[0.2em] uppercase text-primary">Sequence Chronology</span>
+                                        <button onClick={() => setTraversalSequence([])} className="text-[0.6rem] font-bold tracking-[0.1em] uppercase text-[#B0B0B0] hover:text-primary transition-colors">Clear</button>
+                                    </div>
+                                    <div className="flex flex-wrap gap-x-6 gap-y-4 items-center">
+                                        {traversalSequence.map((val, idx) => (
+                                            <React.Fragment key={idx}>
+                                                <div className="flex flex-col items-center">
+                                                    <span className="text-[0.6rem] text-[#B0B0B0] mb-1 font-mono">{idx + 1}</span>
+                                                    <span className="text-[1.2rem] font-medium text-[#2A2D2E]" style={{ fontFamily: '"Playfair Display", serif' }}>{val}</span>
+                                                </div>
+                                                {idx < traversalSequence.length - 1 && (
+                                                    <div className="h-[1px] w-4 bg-[#EBEBEB]"></div>
+                                                )}
+                                            </React.Fragment>
+                                        ))}
+                                    </div>
+                                </div>
+                            )}
 
                             {/* Decorative Corner Brackets */}
                             <div className="absolute top-8 left-8 w-8 h-8 border-t border-l border-[#EBEBEB]"></div>
@@ -346,7 +380,7 @@ function BinaryTreeVisualizer() {
                                     <button 
                                         onClick={handleAsk} 
                                         disabled={isLoading} 
-                                        className="mt-4 bg-primary text-white text-[0.65rem] font-bold tracking-[0.2em] uppercase py-5 hover:bg-on-surface transition-all disabled:opacity-50 rounded-sm"
+                                        className="mt-6 w-full bg-[#2A2D2E] text-white text-[0.65rem] font-bold tracking-[0.2em] uppercase py-5 hover:bg-[#5f5e5e] transition-all disabled:opacity-50 rounded-sm shadow-sm"
                                     >
                                             {isLoading ? 'Processing Query...' : 'Submit Inquiry'}
                                     </button>
@@ -378,7 +412,32 @@ function BinaryTreeVisualizer() {
                                                     key={index} 
                                                     className={`p-6 rounded-sm text-[0.9rem] leading-relaxed ${msg.role === 'user' ? 'bg-white border border-[#EBEBEB] self-end max-w-[90%] font-serif italic' : 'bg-surface-container-lowest shadow-ambient self-start max-w-[95%] border-l-2 border-primary'}`}
                                                 >
-                                                    <ReactMarkdown className="prose prose-sm font-sans">{msg.text}</ReactMarkdown>
+                                                    {msg.text ? (
+                                                        msg.role === 'error' ? (
+                                                            <p className="text-red-500 font-sans">{msg.text}</p>
+                                                        ) : (
+                                                            <ErrorBoundary fallbackText={msg.text || "Error loading message."}>
+                                                                <div className="prose prose-sm font-serif text-[#2A2D2E] leading-relaxed tracking-tight">
+                                                                    <ReactMarkdown 
+                                                                        components={{
+                                                                            p: ({node, ...props}) => <p className="mb-4 last:mb-0 italic" {...props} />,
+                                                                            code: ({node, inline, ...props}) => 
+                                                                                inline 
+                                                                                ? <code className="bg-[#EBEBEB] px-1 py-0.5 rounded text-[0.85rem] font-mono non-italic" {...props} />
+                                                                                : <code className="block bg-[#2A2D2E] text-[#F7F9F9] p-4 rounded-sm my-4 text-[0.85rem] font-mono non-italic overflow-x-auto" {...props} />,
+                                                                            strong: ({node, ...props}) => <strong className="font-bold text-primary not-italic" {...props} />,
+                                                                            ul: ({node, ...props}) => <ul className="list-disc pl-5 mb-4 space-y-2" {...props} />,
+                                                                            ol: ({node, ...props}) => <ol className="list-decimal pl-5 mb-4 space-y-2" {...props} />
+                                                                        }}
+                                                                    >
+                                                                        {String(msg.text || "")}
+                                                                    </ReactMarkdown>
+                                                                </div>
+                                                            </ErrorBoundary>
+                                                        )
+                                                    ) : (
+                                                        <p className="text-[#B0B0B0] italic">No content available...</p>
+                                                    )}
                                                 </div>
                                             ))}
                                         </div>

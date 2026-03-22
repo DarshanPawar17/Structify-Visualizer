@@ -541,3 +541,115 @@ export async function findMinValue(bstVisArea, setHistoryList, hisnum, displayMe
     displayMessage(`The minimum value in the tree is: ${minValue}`);
     setHistoryList(prev => [...prev, { id: hisnum, text: `Found minimum value: ${minValue}.` }]);
 }
+
+let traversalTimeline = gsap.timeline({ paused: true });
+
+function resetNodes(bstVisArea) {
+    gsap.to(bstVisArea.querySelectorAll('.bst-node'), {
+        duration: 0.3,
+        scale: 1,
+        backgroundColor: '#FFFFFF',
+        color: '#2A2D2E',
+        borderColor: '#EBEBEB',
+        ease: 'power1.inOut'
+    });
+}
+
+function animateTraversalNode(visualNode, tl) {
+    tl.to(visualNode, {
+        duration: 0.5,
+        scale: 1.3,
+        backgroundColor: '#f2f4f4',
+        color: '#5f5e5e',
+        borderColor: '#5f5e5e',
+        ease: 'power1.inOut'
+    });
+    tl.to(visualNode, {
+        duration: 0.25,
+        scale: 1,
+        backgroundColor: '#FFFFFF',
+        color: '#2A2D2E',
+        borderColor: '#EBEBEB',
+        ease: 'power1.inOut'
+    }, '>-0.15');
+}
+
+export async function handleTraversal(bstVisArea, type, setHistoryList, hisnum, displayMessage) {
+    if (!binarySearchTree.root) {
+        displayMessage("The tree is empty!");
+        return [];
+    }
+
+    traversalTimeline.clear();
+    resetNodes(bstVisArea);
+
+    const getVisualNode = (node) => bstVisArea.querySelector(`.bst-node[data-value="${node.value}"]`);
+    const sequence = [];
+    
+    switch (type) {
+        case 'inorder':
+            inOrderTraversal(binarySearchTree.root, traversalTimeline, getVisualNode, sequence);
+            setHistoryList(prev => [...prev, { id: hisnum, text: `Initiated inorder traversal.` }]);
+            break;
+        case 'preorder':
+            preOrderTraversal(binarySearchTree.root, traversalTimeline, getVisualNode, sequence);
+            setHistoryList(prev => [...prev, { id: hisnum, text: `Initiated preorder traversal.` }]);
+            break;
+        case 'postorder':
+            postOrderTraversal(binarySearchTree.root, traversalTimeline, getVisualNode, sequence);
+            setHistoryList(prev => [...prev, { id: hisnum, text: `Initiated postorder traversal.` }]);
+            break;
+        case 'levelorder':
+            levelOrderTraversal(traversalTimeline, getVisualNode, sequence);
+            setHistoryList(prev => [...prev, { id: hisnum, text: `Initiated level-order traversal.` }]);
+            break;
+        default:
+            return [];
+    }
+    displayMessage(`Traversal started: ${type}`);
+    traversalTimeline.play();
+    return sequence;
+}
+
+function inOrderTraversal(node, tl, getVisualNode, sequence) {
+    if (node) {
+        inOrderTraversal(node.left, tl, getVisualNode, sequence);
+        const visualNode = getVisualNode(node);
+        if (visualNode) animateTraversalNode(visualNode, tl);
+        sequence.push(node.value);
+        inOrderTraversal(node.right, tl, getVisualNode, sequence);
+    }
+}
+
+function preOrderTraversal(node, tl, getVisualNode, sequence) {
+    if (node) {
+        sequence.push(node.value);
+        const visualNode = getVisualNode(node);
+        if (visualNode) animateTraversalNode(visualNode, tl);
+        preOrderTraversal(node.left, tl, getVisualNode, sequence);
+        preOrderTraversal(node.right, tl, getVisualNode, sequence);
+    }
+}
+
+function postOrderTraversal(node, tl, getVisualNode, sequence) {
+    if (node) {
+        postOrderTraversal(node.left, tl, getVisualNode, sequence);
+        postOrderTraversal(node.right, tl, getVisualNode, sequence);
+        sequence.push(node.value);
+        const visualNode = getVisualNode(node);
+        if (visualNode) animateTraversalNode(visualNode, tl);
+    }
+}
+
+function levelOrderTraversal(tl, getVisualNode, sequence) {
+    if (!binarySearchTree.root) return;
+    const queue = [binarySearchTree.root];
+    while (queue.length > 0) {
+        const node = queue.shift();
+        sequence.push(node.value);
+        const visualNode = getVisualNode(node);
+        if (visualNode) animateTraversalNode(visualNode, tl);
+        if (node.left) queue.push(node.left);
+        if (node.right) queue.push(node.right);
+    }
+}

@@ -18,35 +18,37 @@ import MaxHeapVisualizer from "./Pages/MaxHeapVisualizer";
 import MinHeapVisualizer from "./Pages/MinHeapVisualizer";
 import AvlTreeVisualizer from "./Pages/AvlTreeVisualizer";
 import PageTransition from "./components/PageTransition";
-
+import ErrorBoundary from "./components/ui/ErrorBoundary";
 
 const App = () => {
   return (
-    <Router>
-      <ScrollToTop />
-      <GlobalSoundPlayer />
-      <PageTransition>
-        <Routes>
-          <Route path="/" element={<Index />} />
-          <Route path="/features" element={<Features />} />
-          <Route path="/data-structures" element={<DataStructures />} />
-          <Route path="/documentation" element={<Documentation />} />
-          <Route path="/about" element={<About />} />
-          <Route path="/contact" element={<Contact />} />
-          <Route path="/visualization/stack" element={<StackVisualizer />} />
-          <Route path="/visualization/Queue" element={<QueueVisualizer />} />
-          <Route path="/visualization/SinglyLinkedList" element={<LinkedListVisualizer />} />
-          <Route path="/visualization/DoublyLinkedList" element={<DoublyLinkedListVisualizer />} />
-          <Route path="/visualization/BinaryTree" element={<BinaryTreeVisualizer />} />
-          <Route path="/visualization/BinarySearchTree" element={<Bst />} />
-          <Route path="/visualization/MaxHeap" element={<MaxHeapVisualizer />} />
-          <Route path="/visualization/MinHeap" element={<MinHeapVisualizer />} />
-          <Route path="/visualization/AVLTree" element={<AvlTreeVisualizer />} />
-          {/* fallback for invalid routes */}
-          <Route path="*" element={<NotFound />} />
-        </Routes>
-      </PageTransition>
-    </Router>
+    <ErrorBoundary fallbackText="The application encountered an unexpected error. Please refresh the page.">
+      <Router>
+        <ScrollToTop />
+        <GlobalSoundPlayer />
+        <PageTransition>
+          <Routes>
+            <Route path="/" element={<Index />} />
+            <Route path="/features" element={<Features />} />
+            <Route path="/data-structures" element={<DataStructures />} />
+            <Route path="/documentation" element={<Documentation />} />
+            <Route path="/about" element={<About />} />
+            <Route path="/contact" element={<Contact />} />
+            <Route path="/visualization/stack" element={<StackVisualizer />} />
+            <Route path="/visualization/Queue" element={<QueueVisualizer />} />
+            <Route path="/visualization/SinglyLinkedList" element={<LinkedListVisualizer />} />
+            <Route path="/visualization/DoublyLinkedList" element={<DoublyLinkedListVisualizer />} />
+            <Route path="/visualization/BinaryTree" element={<BinaryTreeVisualizer />} />
+            <Route path="/visualization/BinarySearchTree" element={<Bst />} />
+            <Route path="/visualization/MaxHeap" element={<MaxHeapVisualizer />} />
+            <Route path="/visualization/MinHeap" element={<MinHeapVisualizer />} />
+            <Route path="/visualization/AVLTree" element={<AvlTreeVisualizer />} />
+            {/* fallback for invalid routes */}
+            <Route path="*" element={<NotFound />} />
+          </Routes>
+        </PageTransition>
+      </Router>
+    </ErrorBoundary>
   );
 };
 

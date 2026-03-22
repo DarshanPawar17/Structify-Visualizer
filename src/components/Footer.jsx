@@ -43,9 +43,10 @@ const Footer = () => {
           
           {/* Logo Area */}
           <div className='flex flex-col lg:w-1/4'>
-            <div className='text-[#2A2D2E] text-2xl flex items-center gap-3 font-bold tracking-tight' style={{ fontFamily: '"Manrope", sans-serif' }}>
-              <div className="flex">
-                <span className="bi bi-node-plus text-[#2A2D2E] text-xl opacity-90"></span>
+            <div className='text-[#2A2D2E] text-2xl flex items-center gap-2 font-extrabold tracking-tighter' style={{ fontFamily: '"Manrope", sans-serif' }}>
+              <div>
+                <span className="bi bi-chevron-left text-primary"></span>
+                <span className="bi bi-chevron-right text-primary"></span>
               </div>
               Structify
             </div>

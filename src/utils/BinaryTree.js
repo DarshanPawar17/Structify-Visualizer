@@ -488,70 +488,76 @@ function resetNodes(btVisArea) {
 export async function handleTraversal(btVisArea, type, setHistoryList, hisnum, displayMessage) {
     if (!binaryTree.root) {
         displayMessage("The tree is empty! Please insert some nodes first.");
-        return;
+        return [];
     }
 
     traversalTimeline.clear();
     resetNodes(btVisArea);
 
     const getVisualNode = (node) => btVisArea.querySelector(`.bt-node[data-value="${node.value}"]`);
+    const sequence = [];
     
     switch (type) {
         case 'inorder':
-            inOrderTraversal(binaryTree.root, traversalTimeline, getVisualNode);
+            inOrderTraversal(binaryTree.root, traversalTimeline, getVisualNode, sequence);
             setHistoryList(prev => [...prev, { id: hisnum, text: `Initiated inorder traversal.` }]);
             break;
         case 'preorder':
-            preOrderTraversal(binaryTree.root, traversalTimeline, getVisualNode);
+            preOrderTraversal(binaryTree.root, traversalTimeline, getVisualNode, sequence);
             setHistoryList(prev => [...prev, { id: hisnum, text: `Initiated preorder traversal.` }]);
             break;
         case 'postorder':
-            postOrderTraversal(binaryTree.root, traversalTimeline, getVisualNode);
+            postOrderTraversal(binaryTree.root, traversalTimeline, getVisualNode, sequence);
             setHistoryList(prev => [...prev, { id: hisnum, text: `Initiated postorder traversal.` }]);
             break;
         case 'levelorder':
-            levelOrderTraversal(traversalTimeline, getVisualNode);
+            levelOrderTraversal(traversalTimeline, getVisualNode, sequence);
             setHistoryList(prev => [...prev, { id: hisnum, text: `Initiated level-order traversal.` }]);
             break;
         default:
-            return;
+            return [];
     }
-    displayMessage(`Traversal completed: ${type}`);
+    displayMessage(`Traversal started: ${type}`);
     traversalTimeline.play();
+    return sequence;
 }
 
-function inOrderTraversal(node, tl, getVisualNode) {
+function inOrderTraversal(node, tl, getVisualNode, sequence) {
     if (node) {
-        inOrderTraversal(node.left, tl, getVisualNode);
+        inOrderTraversal(node.left, tl, getVisualNode, sequence);
         const visualNode = getVisualNode(node);
         if (visualNode) animateNode(visualNode, tl);
-        inOrderTraversal(node.right, tl, getVisualNode);
+        sequence.push(node.value);
+        inOrderTraversal(node.right, tl, getVisualNode, sequence);
     }
 }
 
-function preOrderTraversal(node, tl, getVisualNode) {
+function preOrderTraversal(node, tl, getVisualNode, sequence) {
     if (node) {
+        sequence.push(node.value);
         const visualNode = getVisualNode(node);
         if (visualNode) animateNode(visualNode, tl);
-        preOrderTraversal(node.left, tl, getVisualNode);
-        preOrderTraversal(node.right, tl, getVisualNode);
+        preOrderTraversal(node.left, tl, getVisualNode, sequence);
+        preOrderTraversal(node.right, tl, getVisualNode, sequence);
     }
 }
 
-function postOrderTraversal(node, tl, getVisualNode) {
+function postOrderTraversal(node, tl, getVisualNode, sequence) {
     if (node) {
-        postOrderTraversal(node.left, tl, getVisualNode);
-        postOrderTraversal(node.right, tl, getVisualNode);
+        postOrderTraversal(node.left, tl, getVisualNode, sequence);
+        postOrderTraversal(node.right, tl, getVisualNode, sequence);
+        sequence.push(node.value);
         const visualNode = getVisualNode(node);
         if (visualNode) animateNode(visualNode, tl);
     }
 }
 
-function levelOrderTraversal(tl, getVisualNode) {
+function levelOrderTraversal(tl, getVisualNode, sequence) {
     if (!binaryTree.root) return;
     const queue = [binaryTree.root];
     while (queue.length > 0) {
         const node = queue.shift();
+        sequence.push(node.value);
         const visualNode = getVisualNode(node);
         if (visualNode) animateNode(visualNode, tl);
         if (node.left) queue.push(node.left);

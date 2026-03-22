@@ -2,8 +2,9 @@ import React from 'react'
 import Navbar from '../components/Navbar'
 import FeatureCard from '../components/ui/FeatureCard'
 import Footer from '../components/Footer'
-import ChatCard from '../components/ChatCard'
+import AISimulator from '../components/AISimulator'
 import { Link } from 'react-router-dom'
+import { HashLink } from 'react-router-hash-link'
 
 const Features = () => {
   return (
@@ -23,11 +24,11 @@ const Features = () => {
             Discover the comprehensive set of tools and features that make Structify the most effective platform to learn complex data structures and algorithms through pure, unadulterated visualization.
           </p>
           <div className='flex flex-col sm:flex-row gap-8 items-start sm:items-center'>
-            <Link to="/data-structures">
+            <HashLink smooth to="/features#ai">
               <button className="bg-primary text-on-primary rounded-sm px-8 py-4 title-md cursor-pointer hover:bg-primary-dim transition-colors shadow-ambient">
-                Try Interactive Demo
+                Test AI Simulator
               </button>
-            </Link>
+            </HashLink>
             <Link to="/documentation">
               <button className="border-b border-primary text-primary pb-1 title-md hover:text-on-surface transition-colors cursor-pointer">
                 Explore Documentation
@@ -125,19 +126,19 @@ const Features = () => {
       <section className='bg-[#F7F9F9] py-32 px-8 sm:px-16 lg:px-24 flex justify-center w-full relative border-t border-[#EBEBEB]' id='ai'>
         <div className='w-full max-w-[1200px] flex flex-col lg:flex-row items-center justify-between gap-16 lg:gap-24'>
           
-          {/* Left Column: Chat Card contained in the elegant framed box */}
-          <div className="w-full lg:w-1/2 relative flex justify-center items-center">
-            <div className="w-full max-w-[500px] aspect-square bg-white shadow-[0_20px_60px_rgba(45,52,53,0.06)] relative flex items-center justify-center p-8 sm:p-12">
-              <div className="absolute top-8 left-8 w-12 h-12 border-t-[1px] border-l-[1px] border-[#D1D5DB]"></div>
-              <div className="absolute bottom-8 right-8 w-12 h-12 border-b-[1px] border-r-[1px] border-[#D1D5DB]"></div>
-              <div className="w-full h-full relative z-10 flex border-[0.5px] border-[#EBEBEB]">
-                <ChatCard />
+          {/* Left Column: AISimulator contained in the elegant framed box */}
+          <div className="w-full lg:w-3/5 relative flex justify-center items-center">
+            <div className="w-full bg-white shadow-[0_20px_60px_rgba(45,52,53,0.06)] relative flex flex-col p-4 sm:p-8">
+              <div className="absolute top-4 left-4 w-12 h-12 border-t-[1px] border-l-[1px] border-[#D1D5DB]"></div>
+              <div className="absolute bottom-4 right-4 w-12 h-12 border-b-[1px] border-r-[1px] border-[#D1D5DB]"></div>
+              <div className="w-full h-full relative z-10 flex flex-col">
+                <AISimulator />
               </div>
             </div>
           </div>
 
           {/* Right Column: Editorial Text details */}
-          <div className="w-full lg:w-1/2 flex flex-col justify-center">
+          <div className="w-full lg:w-2/5 flex flex-col justify-center">
             <div className="mb-6">
               <span className="text-[0.65rem] font-bold text-tertiary tracking-[0.25em] uppercase" style={{ color: '#886d52' }}>Silent Authority</span>
             </div>

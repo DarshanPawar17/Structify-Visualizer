@@ -58,7 +58,7 @@ const AnimatedThumbnail = ({ type }) => {
         </svg>
 
         {/* Level 1 (Root) */}
-        <div className={`absolute top-[20%] left-[50%] -translate-x-1/2 -translate-y-1/2 w-10 h-10 rounded-full border-2 border-primary flex items-center justify-center z-10 shadow-ambient ${isHeap ? 'bg-primary text-white animate-pulse' : 'bg-surface text-primary'} transition-all duration-700`}>
+        <div className={`absolute top-[20%] left-[50%] -translate-x-1/2 -translate-y-1/2 w-10 h-10 rounded-full border-2 border-primary flex items-center justify-center z-10 shadow-ambient bg-surface text-primary transition-all duration-700`}>
           <span className="text-[12px] font-bold">{isHeap ? '99' : '50'}</span>
         </div>
 

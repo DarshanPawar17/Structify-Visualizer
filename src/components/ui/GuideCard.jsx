@@ -8,24 +8,33 @@ const GuideCard = ({
   bestFor 
 }) => {
   return (
-    <div className="bg-[#0A1420] border border-gray-800 rounded-2xl p-6 text-white w-[585px] hover:bg-[#0F1B2E] transition-colors duration-300">
+    <div className="bg-white border border-[#EBEBEB] rounded-sm p-8 text-[#2A2D2E] w-[450px] hover:shadow-ambient transition-all duration-500 group">
       {/* Title */}
-      <h2 className="text-2xl font-bold mb-3">{title}</h2>
+      <h2 className="text-2xl tracking-tight mb-4 font-serif italic" style={{ fontFamily: '"Playfair Display", serif' }}>{title}</h2>
 
       {/* Description */}
-      <p className="text-gray-400 mb-4">{description}</p>
+      <p className="text-[#717171] mb-8 font-serif leading-relaxed italic text-[0.95rem] border-l-2 border-[#EBEBEB] pl-4 group-hover:border-primary transition-colors">{description}</p>
 
       {/* Details */}
-      <ul className="text-sm text-gray-300 space-y-1 mb-6">
-        <li>• <span className="font-semibold">Time Complexity:</span> {timeComplexity}</li>
-        <li>• <span className="font-semibold">Space Complexity:</span> {spaceComplexity}</li>
-        <li>• <span className="font-semibold">Best for:</span> {bestFor}</li>
-      </ul>
+      <div className="space-y-4 mb-8">
+        <div className="flex flex-col gap-1">
+            <span className="text-[0.6rem] font-bold text-[#B0B0B0] tracking-[0.2em] uppercase">Time Complexity</span>
+            <span className="text-[0.85rem] font-medium text-[#2A2D2E]">{timeComplexity}</span>
+        </div>
+        <div className="flex flex-col gap-1">
+            <span className="text-[0.6rem] font-bold text-[#B0B0B0] tracking-[0.2em] uppercase">Space Complexity</span>
+            <span className="text-[0.85rem] font-medium text-[#2A2D2E]">{spaceComplexity}</span>
+        </div>
+        <div className="flex flex-col gap-1">
+            <span className="text-[0.6rem] font-bold text-[#B0B0B0] tracking-[0.2em] uppercase">Best For</span>
+            <span className="text-[0.85rem] font-medium text-[#2A2D2E]">{bestFor}</span>
+        </div>
+      </div>
 
       {/* Button */}
-      <button className="flex items-center gap-2 bg-[#0A2330] hover:bg-[#3ED0FF] hover:text-black transition-colors px-4 py-2 rounded-lg text-sm font-semibold cursor-pointer">
-        <span className="bi bi-arrow-right"></span>
-        Try {title} Visualizer
+      <button className="flex items-center gap-3 text-[#2A2D2E] font-bold tracking-[0.15em] uppercase text-[0.65rem] border-t border-[#F2F4F4] pt-6 w-full hover:text-primary transition-colors cursor-pointer group">
+        <span className="bi bi-arrow-right text-lg group-hover:translate-x-2 transition-transform"></span>
+        Initialize {title} Visualizer
       </button>
     </div>
   );

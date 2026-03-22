@@ -3,6 +3,7 @@ import Navbar from '../components/Navbar'
 import GuideCard from '../components/ui/GuideCard'
 import HelpCard from '../components/ui/HelpCard'
 import Footer from '../components/Footer';
+import { HashLink } from 'react-router-hash-link';
 
 const dataStructures = [
   {
@@ -81,162 +82,145 @@ const dataStructures = [
 
 const Documentation = () => {
   return (
-    <div style={{backgroundColor:"#0A1018" , height:"100%"}}>
+    <div className="w-full bg-white text-on-surface overflow-x-hidden font-sans min-h-screen flex flex-col">
       <Navbar />
-      <div className='h-[225px] flex flex-col w-full justify-center text-center gap-5'>
-        <div className='text-white text-5xl font-bold'>
-          Structify Documentation
+
+      {/* Minimalist Architectural Hero */}
+      <section className='relative w-full py-32 px-6 sm:px-16 flex flex-col items-center justify-center bg-[#F7F9F9] border-b border-[#EBEBEB]'>
+        <div className="absolute inset-0 opacity-[0.03] select-none pointer-events-none" style={{ backgroundImage: 'radial-gradient(#000 0.5px, transparent 0.5px)', backgroundSize: '24px 24px' }}></div>
+        <div className="relative z-10 flex flex-col items-center text-center max-w-4xl">
+          <span className="text-[0.65rem] font-bold text-primary tracking-[0.3em] uppercase mb-6">Documentation</span>
+          <h1 className="text-[#2A2D2E] text-5xl sm:text-7xl lg:text-[5rem] tracking-tight mb-8" style={{ fontFamily: '"Playfair Display", serif', lineHeight: '1.1' }}>
+            Absolute <span className="italic">Clarity.</span>
+          </h1>
+          <p className="text-[#717171] text-lg font-serif italic max-w-2xl leading-relaxed">
+            A comprehensive architectural guide to mastering data structures and leveraging the specialized Structify AI diagnostic system.
+          </p>
         </div>
-        <div className='text-[#87A3B8] text-xl w-full flex justify-center'>
-          <div className='w-[50%]'>
-            Learn how to visualize data structures and leverage Structify AI for better understanding
-          </div>
-        </div>
-      </div>
-      <div>
-        <div className='bg-[#040B1C] mx-5 rounded-lg border-[1px] border-gray-800 py-5 px-6'>
-          <div className='flex gap-2'>
-            <div>
-              <span className='bi bi-play text-[#00BBE3] text-3xl'></span>
-            </div>
-            <div className='text-white text-2xl font-semibold'>
-              Quick Start
-            </div>
-          </div>
-          <div className='flex justify-center gap-24 mt-6 pb-3'>
-            <div className='flex flex-col gap-3 text-center'>
-              <div className='w-full flex justify-center'>
-                <div className='bg-[#052233] p-3 rounded-4xl w-[17%] text-center'>
-                  <span className='text-[#02D4FF]'>1</span>
+      </section>
+
+      <div className='w-full max-w-[1400px] mx-auto grid grid-cols-1 lg:grid-cols-12 gap-12 py-24 px-6 sm:px-16'>
+        
+        {/* Quick Start Sidebar-Nav (Architectural Style) */}
+        <aside className="lg:col-span-3 lg:sticky lg:top-32 h-fit flex flex-col gap-12">
+           <div className="flex flex-col gap-6">
+              <span className="text-[0.6rem] font-bold text-[#B0B0B0] tracking-[0.2em] uppercase border-b border-[#EBEBEB] pb-4">On this page</span>
+              <nav className="flex flex-col gap-3 font-sans">
+                 <a href="#quick-start" className="text-[#2A2D2E] text-[0.85rem] font-bold hover:text-primary transition-colors py-1">01. QUICK START</a>
+                 <a href="#guides" className="text-[#717171] text-[0.85rem] hover:text-primary transition-colors py-1">02. DATA STRUCTURES</a>
+                 <a href="#ai-assistant" className="text-[#717171] text-[0.85rem] hover:text-primary transition-colors py-1">03. AI ASSISTANT</a>
+                 <a href="#help" className="text-[#717171] text-[0.85rem] hover:text-primary transition-colors py-1">04. SUPPORT</a>
+              </nav>
+           </div>
+           
+           <div className="bg-[#F7F9F9] p-8 border border-[#EBEBEB] rounded-sm hidden lg:flex flex-col gap-6">
+              <span className="text-[#2A2D2E] text-[0.65rem] font-bold tracking-[0.2em] uppercase">Need Clarity?</span>
+              <p className="text-[#8C8C8C] text-[0.8rem] leading-relaxed font-serif italic">
+                Our AI diagnostic core is available in every visualization route to solve complex queries.
+              </p>
+              <HashLink smooth to="/#ai" className="text-primary text-[0.7rem] font-bold tracking-widest uppercase flex items-center gap-2 group">
+                 Consult AI <span className="bi bi-arrow-right group-hover:translate-x-1 transition-transform"></span>
+              </HashLink>
+           </div>
+        </aside>
+
+        {/* Main Content Area */}
+        <main className="lg:col-span-9 flex flex-col gap-32">
+          
+          {/* 01. QUICK START */}
+          <section id="quick-start" className="flex flex-col scroll-mt-32">
+             <div className="mb-12">
+               <h2 className="text-[#2A2D2E] text-3xl sm:text-4xl font-serif italic mb-4" style={{ fontFamily: '"Playfair Display", serif' }}>01. Quick Start</h2>
+               <div className="h-1 w-12 bg-primary"></div>
+             </div>
+             
+             <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
+                {[
+                  { step: "01", title: "Select Structure", desc: "Choose from our catalog of 9+ architectural data models including Trees, Heaps, and Lists." },
+                  { step: "02", title: "Live Execution", desc: "Interact with real-time operations and watch the structural topology mutate through animations." },
+                  { step: "03", title: "AI Diagnostic", desc: "Utilize the integrated AI for immediate time-complexity analysis and structural feedback." }
+                ].map((item, idx) => (
+                  <div key={idx} className="flex flex-col gap-6 group">
+                     <span className="text-4xl font-serif italic text-primary opacity-20 group-hover:opacity-100 transition-opacity" style={{ fontFamily: '"Playfair Display", serif' }}>{item.step}</span>
+                     <h3 className="text-[#2A2D2E] font-bold tracking-[0.15em] text-[0.7rem] uppercase">{item.title}</h3>
+                     <p className="text-[#717171] text-[0.9rem] leading-relaxed font-serif italic">{item.desc}</p>
+                  </div>
+                ))}
+             </div>
+          </section>
+
+          {/* 02. DATA STRUCTURE GUIDES */}
+          <section id="guides" className="flex flex-col scroll-mt-32">
+             <div className="mb-12">
+               <h2 className="text-[#2A2D2E] text-3xl sm:text-4xl font-serif italic mb-4" style={{ fontFamily: '"Playfair Display", serif' }}>02. Data Structure Guides</h2>
+               <div className="h-1 w-12 bg-primary"></div>
+             </div>
+             <div className="flex flex-wrap gap-8 justify-start">
+               {dataStructures.map((ds, index) => (
+                 <GuideCard key={index} {...ds} />
+               ))}
+             </div>
+          </section>
+
+          {/* 03. AI ASSISTANT SECTION */}
+          <section id="ai-assistant" className="flex flex-col scroll-mt-32 bg-[#F7F9F9] p-12 sm:p-20 border border-[#EBEBEB] relative">
+             <div className="absolute top-0 right-0 w-24 h-24 border-t border-r border-[#D1D5DB] opacity-50 m-6"></div>
+             <div className="mb-12 relative z-10">
+               <h2 className="text-[#2A2D2E] text-3xl sm:text-4xl font-serif italic mb-4" style={{ fontFamily: '"Playfair Display", serif' }}>03. AI Assistant System</h2>
+               <p className="text-[#717171] text-[0.9rem] font-serif italic leading-relaxed max-w-xl">
+                 Each visualizer is equipped with a specialized LLM agent configured for deep structural analysis and algorithmic validation.
+               </p>
+             </div>
+
+             <div className="grid grid-cols-1 md:grid-cols-2 gap-16 relative z-10">
+                <div className="flex flex-col gap-6">
+                   <h4 className="text-[0.65rem] font-bold tracking-[0.2em] uppercase text-[#2A2D2E]">Capabilities</h4>
+                   <ul className="space-y-4">
+                      {[
+                        "Explain complex topological operations",
+                        "Time & Space complexity auditing",
+                        "Diagnostic code refactoring",
+                        "Shortest-path logic derivation"
+                      ].map((text, i) => (
+                        <li key={i} className="flex items-center gap-4 text-[#717171] text-[0.9rem] font-serif italic">
+                           <span className="w-1.5 h-1.5 bg-primary rounded-full"></span> {text}
+                        </li>
+                      ))}
+                   </ul>
                 </div>
-              </div>
-              <div className='text-white text-lg'>
-                Choose a Data Structure
-              </div>
-              <div className='text-gray-400 text-sm'>
-                Select from stack, trees, linked lists, and more
-              </div>
-            </div>
-            <div className='flex flex-col gap-3 text-center'>
-              <div className='w-full flex justify-center'>
-                <div className='bg-[#052233] p-3 rounded-4xl w-[17%] text-center'>
-                  <span className='text-[#02D4FF]'>2</span>
+                <div className="flex flex-col gap-6">
+                   <h4 className="text-[0.65rem] font-bold tracking-[0.2em] uppercase text-[#2A2D2E]">Console Examples</h4>
+                   <div className="flex flex-col gap-4">
+                      {[
+                        "Explain AVL tree rebalancing logic.",
+                        "Why is recursion preferred for BST search?",
+                        "Analyze this hash table collision."
+                      ].map((text, i) => (
+                        <div key={i} className="bg-white border border-[#EBEBEB] p-4 text-[0.8rem] text-[#8C8C8C] italic font-serif leading-relaxed shadow-sm">
+                           "{text}"
+                        </div>
+                      ))}
+                   </div>
                 </div>
-              </div>
-              <div className='text-white text-lg'>
-                Interactive Visualization
-              </div>
-              <div className='text-gray-400 text-sm'>
-                Watch operations in real-time with animations
-              </div>
-            </div>
-            <div className='flex flex-col gap-3 text-center'>
-              <div className='w-full flex justify-center'>
-                <div className='bg-[#052233] p-3 rounded-4xl w-[23%] text-center'>
-                  <span className='text-[#02D4FF]'>3</span>
-                </div>
-              </div>
-              <div className='text-white text-lg'>
-                Ask Structify AI
-              </div>
-              <div className='text-gray-400 text-sm'>
-                Get instant help and explanations
-              </div>
-            </div>
-          </div>
-        </div>
+             </div>
+          </section>
+
+          {/* 04. ADDITIONAL HELP */}
+          <section id="help" className="flex flex-col scroll-mt-32 pb-12">
+             <div className="mb-12">
+               <h2 className="text-[#2A2D2E] text-3xl sm:text-4xl font-serif italic mb-4" style={{ fontFamily: '"Playfair Display", serif' }}>04. Extended Support</h2>
+               <div className="h-1 w-12 bg-primary"></div>
+             </div>
+             <div className='grid grid-cols-1 md:grid-cols-3 gap-8'>
+               <HelpCard icon="bi-robot" title="Diagnostic Chat" description="Initiate a session with our primary AI core." buttonText="Consult Now" />
+               <HelpCard icon="bi-code" title="Algorithm Lab" description="Interactive challenges for deep mastery." buttonText="Coming Soon" />
+               <HelpCard icon="bi-book" title="Academic Vault" description="Detailed step-by-step video archives." buttonText="Coming Soon" />
+             </div>
+          </section>
+
+        </main>
       </div>
-      <div className='mt-16'>
-        <div className='flex gap-3 mx-6'>
-          <div>
-            <span className='bi bi-code text-[#00D4FF] text-4xl'></span>
-          </div>
-          <div className='text-white text-3xl font-bold'>
-            Data Structure Guide
-          </div>
-        </div>
-        <div className='flex gap-8 ml-7 my-8 flex-wrap'>
-          {dataStructures.map((ds, index) => (
-            <GuideCard
-              key={index}
-              title={ds.title}
-              description={ds.description}
-              timeComplexity={ds.timeComplexity}
-              spaceComplexity={ds.spaceComplexity}
-              bestFor={ds.bestFor}
-            />
-          ))}
-        </div>
-      </div>
-      <div className='mt-16'>
-        <div className='flex gap-3 mx-6'>
-          <div>
-            <span className='bi bi-robot text-[#00D4FF] text-4xl'></span>
-          </div>
-          <div className='text-white text-3xl font-bold'>
-            Structify AI Assistant
-          </div>
-        </div>
-        <div className='bg-[#040B1C] mx-5 rounded-lg border-[1px] border-gray-800 py-8 px-7 mt-8 flex flex-start gap-44'>
-            <div className='flex flex-col gap-2 ml-3'>
-              <div className='text-white text-xl font-semibold'>
-                What can Structify AI help with?
-              </div>
-              <div>
-                <ul>
-                  <li className='mt-3'>
-                    <span className='bi bi-lightning text-[#00D4FF] text-lg'></span> <span className='text-base text-gray-400'>Explain complex data structure operations</span>
-                  </li>
-                  <li className='mt-3'>
-                    <span className='bi bi-lightning text-[#00D4FF] text-lg'></span> <span className='text-base text-gray-400'>Debug your algorithm implementations</span>
-                  </li>
-                  <li className='mt-3'>
-                    <span className='bi bi-lightning text-[#00D4FF] text-lg'></span> <span className='text-base text-gray-400'>Suggest optimal data structures for problems</span>
-                  </li>
-                  <li className='mt-3'>
-                    <span className='bi bi-lightning text-[#00D4FF] text-lg'></span> <span className='text-base text-gray-400'>Provide time and space complexity analysis</span>
-                  </li>
-                  <li className='mt-3'>
-                    <span className='bi bi-lightning text-[#00D4FF] text-lg'></span> <span className='text-base text-gray-400'>Answer coding interview questions</span>
-                  </li>
-                </ul>
-              </div>
-            </div>
-            <div className='flex flex-col gap-2 ml-3'>
-              <div className='text-white text-xl font-semibold'>
-                Example Questions
-              </div>
-              <div>
-                <ul>
-                  <li className='mt-4 bg-[#17202C] py-3 rounded-lg px-3 w-[600px]'>
-                    <span className='text-gray-400'>"Why is my binary search not working?"</span>
-                  </li>
-                  <li className='mt-4 bg-[#17202C] py-3 rounded-lg px-3 w-[600px]'>
-                    <span className='text-gray-400'>"What's the best data structure for frequent insertions?"</span>
-                  </li>
-                  <li className='mt-4 bg-[#17202C] py-3 rounded-lg px-3 w-[600px]'>
-                    <span className='text-gray-400'>"Explain how hash collision resolution works"</span>
-                  </li>
-                </ul>
-              </div>
-            </div>
-        </div>
-      </div>
-      <div className='mt-16 pb-3'>
-        <div className='flex gap-3 mx-6'>
-          <div>
-            <span className='bi bi-book text-[#00D4FF] text-4xl'></span>
-          </div>
-          <div className='text-white text-3xl font-bold'>
-            Need More Help?
-          </div>
-        </div>
-        <div className='flex gap-[20px] mx-6 my-8'>
-          <HelpCard icon="bi-robot" title="Ask Structify AI" description="Get instant answers to your data structure questions" buttonText="Start Chatting" />
-          <HelpCard icon="bi-code" title="Practice Problems" description="Test your understanding with interactive challenges" buttonText="Coming Soon" />
-          <HelpCard icon="bi-book" title="Video Tutorials" description="Watch step-by-step explanations of key concepts" buttonText="Coming Soon" />
-        </div>
-      </div>
+
       <Footer />
     </div>
   )
