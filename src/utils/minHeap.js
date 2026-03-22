@@ -109,10 +109,9 @@ export function renderTree(heapvisArea, root = buildTreeFromHeapArray(0)) {
 
         const path = document.createElementNS(svgNS, "path");
         path.setAttribute("d", `M ${startX} ${startY} Q ${cx} ${cy} ${endX} ${endY}`);
-        path.setAttribute("stroke", "#00D3F3");
-        path.setAttribute("stroke-width", "2");
+        path.setAttribute("stroke", "#EBEBEB");
+        path.setAttribute("stroke-width", "1");
         path.setAttribute("fill", "none");
-        path.style.filter = "drop-shadow(0 0 4px #00D3F3)";
         svg.appendChild(path);
     });
 
@@ -170,8 +169,8 @@ async function heapifyUp(heapvisArea) {
 
         if (curEl && parEl) {
             await Promise.all([
-                tweenTo(curEl, { scale: 1.2, duration: 0.3, backgroundColor: '#00D3F3', color: '#0A1018' }),
-                tweenTo(parEl, { scale: 1.2, duration: 0.3, backgroundColor: '#00D3F3', color: '#0A1018' })
+                tweenTo(curEl, { scale: 1.2, duration: 0.3, backgroundColor: '#f2f4f4', color: '#5f5e5e', borderColor: '#5f5e5e' }),
+                tweenTo(parEl, { scale: 1.2, duration: 0.3, backgroundColor: '#f2f4f4', color: '#5f5e5e', borderColor: '#5f5e5e' })
             ]);
         }
 
@@ -184,8 +183,8 @@ async function heapifyUp(heapvisArea) {
 
         if (curEl && parEl) {
             await Promise.all([
-                tweenTo(curEl, { scale: 1, duration: 0.3, backgroundColor: 'rgba(0, 0, 0, 0.6)', color: 'white' }),
-                tweenTo(parEl, { scale: 1, duration: 0.3, backgroundColor: 'rgba(0, 0, 0, 0.6)', color: 'white' })
+                tweenTo(curEl, { scale: 1, duration: 0.3, backgroundColor: '#FFFFFF', color: '#2A2D2E', borderColor: '#EBEBEB' }),
+                tweenTo(parEl, { scale: 1, duration: 0.3, backgroundColor: '#FFFFFF', color: '#2A2D2E', borderColor: '#EBEBEB' })
             ]);
         }
     }
@@ -213,8 +212,8 @@ async function heapifyDown(heapvisArea) {
         const smallEl = getNodeElementByIndex(smallest);
 
         // Animate comparison
-        if (curEl) await tweenTo(curEl, { scale: 1.2, duration: 0.3, backgroundColor: '#00D3F3', color: '#0A1018' });
-        if (smallEl) await tweenTo(smallEl, { scale: 1.2, duration: 0.3, backgroundColor: '#00D3F3', color: '#0A1018' });
+        if (curEl) await tweenTo(curEl, { scale: 1.2, duration: 0.3, backgroundColor: '#f2f4f4', color: '#5f5e5e', borderColor: '#5f5e5e' });
+        if (smallEl) await tweenTo(smallEl, { scale: 1.2, duration: 0.3, backgroundColor: '#f2f4f4', color: '#5f5e5e', borderColor: '#5f5e5e' });
 
         // Swap if needed
         if (smallest !== i) {
@@ -222,8 +221,8 @@ async function heapifyDown(heapvisArea) {
             i = smallest;
         } else {
             // Revert colors if no swap is needed and break
-            if (curEl) await tweenTo(curEl, { scale: 1, duration: 0.3, backgroundColor: 'rgba(0, 0, 0, 0.6)', color: 'white' });
-            if (smallEl) await tweenTo(smallEl, { scale: 1, duration: 0.3, backgroundColor: 'rgba(0, 0, 0, 0.6)', color: 'white' });
+            if (curEl) await tweenTo(curEl, { scale: 1, duration: 0.3, backgroundColor: '#FFFFFF', color: '#2A2D2E', borderColor: '#EBEBEB' });
+            if (smallEl) await tweenTo(smallEl, { scale: 1, duration: 0.3, backgroundColor: '#FFFFFF', color: '#2A2D2E', borderColor: '#EBEBEB' });
             break;
         }
     }

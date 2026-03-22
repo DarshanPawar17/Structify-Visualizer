@@ -114,10 +114,9 @@ export function renderTree(heapvisArea, root = buildTreeFromHeapArray(0)) {
 
         const path = document.createElementNS(svgNS, "path");
         path.setAttribute("d", `M ${startX} ${startY} Q ${cx} ${cy} ${endX} ${endY}`);
-        path.setAttribute("stroke", "#00D3F3");
-        path.setAttribute("stroke-width", "2");
+        path.setAttribute("stroke", "#EBEBEB");
+        path.setAttribute("stroke-width", "1");
         path.setAttribute("fill", "none");
-        path.style.filter = "drop-shadow(0 0 4px #00D3F3)";
         svg.appendChild(path);
     });
 
@@ -173,8 +172,8 @@ async function heapifyUp(heapvisArea) {
         if (curEl && parEl) {
             // Highlight nodes being compared
             await Promise.all([
-                tweenTo(curEl, { scale: 1.2, duration: 0.3, backgroundColor: '#00D3F3', color: '#0A1018' }),
-                tweenTo(parEl, { scale: 1.2, duration: 0.3, backgroundColor: '#00D3F3', color: '#0A1018' })
+                tweenTo(curEl, { scale: 1.2, duration: 0.3, backgroundColor: '#f2f4f4', color: '#5f5e5e', borderColor: '#5f5e5e' }),
+                tweenTo(parEl, { scale: 1.2, duration: 0.3, backgroundColor: '#f2f4f4', color: '#5f5e5e', borderColor: '#5f5e5e' })
             ]);
         }
 
@@ -186,8 +185,8 @@ async function heapifyUp(heapvisArea) {
         if (curEl && parEl) {
             // Revert highlight after comparison
             await Promise.all([
-                tweenTo(curEl, { scale: 1, duration: 0.3, backgroundColor: 'rgba(0, 0, 0, 0.6)', color: 'white' }),
-                tweenTo(parEl, { scale: 1, duration: 0.3, backgroundColor: 'rgba(0, 0, 0, 0.6)', color: 'white' })
+                tweenTo(curEl, { scale: 1, duration: 0.3, backgroundColor: '#FFFFFF', color: '#2A2D2E', borderColor: '#EBEBEB' }),
+                tweenTo(parEl, { scale: 1, duration: 0.3, backgroundColor: '#FFFFFF', color: '#2A2D2E', borderColor: '#EBEBEB' })
             ]);
         }
     }
@@ -206,7 +205,7 @@ async function heapifyDown(heapvisArea) {
         const curEl = getNodeElementByIndex(i);
         
         if (curEl) {
-            await tweenTo(curEl, { scale: 1.2, duration: 0.3, backgroundColor: '#00D3F3', color: '#0A1018' });
+            await tweenTo(curEl, { scale: 1.2, duration: 0.3, backgroundColor: '#f2f4f4', color: '#5f5e5e', borderColor: '#5f5e5e' });
         }
 
         if (l < n) {
@@ -224,7 +223,7 @@ async function heapifyDown(heapvisArea) {
             if (greaterAt(r, largest)) largest = r;
         }
         
-        await tweenTo(document.querySelectorAll('.heap-node'), { scale: 1, duration: 0.3, backgroundColor: 'rgba(0, 0, 0, 0.6)', color: 'white' });
+        await tweenTo(document.querySelectorAll('.heap-node'), { scale: 1, duration: 0.3, backgroundColor: '#FFFFFF', color: '#2A2D2E', borderColor: '#EBEBEB' });
 
         if (largest !== i) {
             await animateSwap(heapvisArea, i, largest);

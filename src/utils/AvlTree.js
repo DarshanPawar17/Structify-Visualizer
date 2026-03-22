@@ -107,8 +107,22 @@ const tweenTo = (el, vars) =>
     new Promise(resolve => gsap.to(el, { ...vars, onComplete: resolve }));
 
 const animateNode = (visualNode, tl) => {
-    tl.to(visualNode, { duration: 0.5, scale: 1.3, ease: 'power1.inOut' });
-    tl.to(visualNode, { duration: 0.25, scale: 1, ease: 'power1.inOut' }, '>-0.15');
+    tl.to(visualNode, {
+        duration: 0.5,
+        scale: 1.3,
+        backgroundColor: '#f2f4f4',
+        color: '#5f5e5e',
+        borderColor: '#5f5e5e',
+        ease: 'power1.inOut'
+    });
+    tl.to(visualNode, {
+        duration: 0.25,
+        scale: 1,
+        backgroundColor: '#FFFFFF',
+        color: '#2A2D2E',
+        borderColor: '#EBEBEB',
+        ease: 'power1.inOut'
+    }, '>-0.15');
 };
 
 function getNodePositions(container) {
@@ -218,10 +232,9 @@ export function renderTree(avlVisArea, root = avlTree.root) {
 
         const path = document.createElementNS(svgNS, "path");
         path.setAttribute("d", `M ${startX} ${startY} Q ${ctrlX} ${ctrlY} ${endX} ${endY}`);
-        path.setAttribute("stroke", "#00D3F3");
-        path.setAttribute("stroke-width", "2");
+        path.setAttribute("stroke", "#EBEBEB");
+        path.setAttribute("stroke-width", "1");
         path.setAttribute("fill", "none");
-        path.style.filter = "drop-shadow(0 0 4px #00D3F3)";
         svg.appendChild(path);
     });
 
@@ -415,8 +428,8 @@ export async function handleSearch(avlVisArea, value, setHistoryList, hisNum, di
         
         if (numValue === currentNode.value) {
             found = true;
-            await tweenTo(el, { duration: 0.5, scale: 1.5, borderColor: '#ffc400', color: '#ffc400', ease: 'back.out(1.7)' });
-            await tweenTo(el, { duration: 0.5, scale: 1, borderColor: '#00D3F3', color: 'white', ease: 'back.out(1.7)' });
+            await tweenTo(el, { duration: 0.5, scale: 1.5, borderColor: '#5f5e5e', color: '#5f5e5e', ease: 'back.out(1.7)' });
+            await tweenTo(el, { duration: 0.5, scale: 1, borderColor: '#EBEBEB', color: '#2A2D2E', ease: 'back.out(1.7)' });
             break;
         }
         currentNode = numValue < currentNode.value ? currentNode.left : currentNode.right;

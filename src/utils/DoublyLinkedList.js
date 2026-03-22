@@ -60,11 +60,11 @@ function renderDoublyLinkedList(dllVisArea) {
 
                 // Using SVGs for better quality and styling control
                 arrowWrapper.innerHTML = `
-                    <svg className="h-full w-full" viewBox="0 0 100 60" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M0 15H90" stroke="#00D3F3" strokeWidth="2" />
-                        <path d="M90 15L85 10L85 20L90 15Z" fill="#00D3F3" />
-                        <path d="M100 45H10" stroke="#00D3F3" strokeWidth="2" />
-                        <path d="M10 45L15 50L15 40L10 45Z" fill="#00D3F3" />
+                    <svg class="h-full w-full" viewBox="0 0 100 60" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M0 15H90" stroke="#886d52" stroke-width="2" />
+                        <path d="M90 15L85 10L85 20L90 15Z" fill="#886d52" />
+                        <path d="M100 45H10" stroke="#886d52" stroke-width="2" />
+                        <path d="M10 45L15 50L15 40L10 45Z" fill="#886d52" />
                     </svg>
                 `;
                 dllVisArea.appendChild(arrowWrapper);
@@ -145,8 +145,8 @@ export async function handleInsertAtPosition(dllVisArea, value, position, setHis
     // Step 1: Traverse and highlight up to the insertion point
     for (let i = 0; i < position; i++) {
         const visualNode = allNodes[i];
-        await tl.to(visualNode, { duration: 0.5, toggleClass: 'highlight', ease: 'power1.inOut', scale: 1.2 , backgroundColor:"#00D3F3" , color:"black"});
-        await tl.to(visualNode, { duration: 0.5, toggleClass: 'highlight', ease: 'power1.inOut', scale: 1 , backgroundColor:"#04060A" , color:"white"});
+        await tl.to(visualNode, { duration: 0.5, toggleClass: 'highlight', ease: 'power1.inOut', scale: 1.2 , backgroundColor:"#f2f4f4" , color:"#5f5e5e"});
+        await tl.to(visualNode, { duration: 0.5, toggleClass: 'highlight', ease: 'power1.inOut', scale: 1 , backgroundColor:"#FFFFFF" , color:"#2A2D2E"});
     }
 
     // Step 2: Shift the nodes to make space
@@ -223,7 +223,7 @@ export async function handleRemoveByValue(dllVisArea, value, setHistoryList, his
 
     while (currentNode !== null) {
         const visualNode = allNodes[count];
-        await tl.to(visualNode, { duration: 0.5, toggleClass: 'highlight', ease: 'power1.inOut', scale: 1.2 , backgroundColor:"#00D3F3" , color:"black"});
+        await tl.to(visualNode, { duration: 0.5, toggleClass: 'highlight', ease: 'power1.inOut', scale: 1.2 , backgroundColor:"#f2f4f4" , color:"#5f5e5e"});
 
         if (currentNode.data == value) {
             found = true;
@@ -231,7 +231,7 @@ export async function handleRemoveByValue(dllVisArea, value, setHistoryList, his
             await tl.to(visualNode, { duration: 0.8, y: 100, opacity: 0, ease: "power1.in" });
             break;
         }
-        await tl.to(visualNode, { duration: 0.5, toggleClass: 'highlight', ease: 'power1.inOut', scale: 1 , backgroundColor:"#04060A" , color:"white"});
+        await tl.to(visualNode, { duration: 0.5, toggleClass: 'highlight', ease: 'power1.inOut', scale: 1 , backgroundColor:"#FFFFFF" , color:"#2A2D2E"});
         currentNode = currentNode.next;
         count++;
     }
@@ -276,15 +276,15 @@ export async function handleSearchForValue(dllVisArea, value, setHistoryList, hi
 
     while (currentNode !== null) {
         const visualNode = allNodes[count];
-        await tl.to(visualNode, { duration: 0.5, toggleClass: 'highlight', ease: 'power1.inOut', scale: 1.2 , backgroundColor:"#00D3F3" , color:"black"});
+        await tl.to(visualNode, { duration: 0.5, toggleClass: 'highlight', ease: 'power1.inOut', scale: 1.2 , backgroundColor:"#f2f4f4" , color:"#5f5e5e"});
 
         if (currentNode.data == value) {
             found = true;
             await tl.to(visualNode, { duration: 0.5, scale: 1.4, ease: 'power2.out' })
-                    .to(visualNode, { duration: 0.5, toggleClass: 'highlight', ease: 'power1.inOut', scale: 1 , backgroundColor:"#04060A" , color:"white"});
+                    .to(visualNode, { duration: 0.5, toggleClass: 'highlight', ease: 'power1.inOut', scale: 1 , backgroundColor:"#FFFFFF" , color:"#2A2D2E"});
             break;
         }
-        await tl.to(visualNode, { duration: 0.5, toggleClass: 'highlight', ease: 'power1.inOut', scale: 1 , backgroundColor:"#04060A" , color:"white"});
+        await tl.to(visualNode, { duration: 0.5, toggleClass: 'highlight', ease: 'power1.inOut', scale: 1 , backgroundColor:"#FFFFFF" , color:"#2A2D2E"});
         currentNode = currentNode.next;
         count++;
     }

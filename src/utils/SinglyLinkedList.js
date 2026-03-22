@@ -147,8 +147,8 @@ export async function handleInsertAtPosition(listVisArea, value, position, setHi
     // Step 1: Traverse and highlight up to the insertion point
     for (let i = 0; i < position; i++) {
         const visualNode = allNodes[i];
-        await tl.to(visualNode, { duration: 0.5, toggleClass: 'highlight', ease: 'power1.inOut', scale: 1.2 , backgroundColor:"#00D3F3" , color:"black" });
-        await tl.to(visualNode, { duration: 0.5, toggleClass: 'highlight', ease: 'power1.inOut', scale: 1 , backgroundColor:"#04060A" , color:"white" });
+        await tl.to(visualNode, { duration: 0.5, toggleClass: 'highlight', ease: 'power1.inOut', scale: 1.2 , backgroundColor:"#f2f4f4" , color:"#5f5e5e" });
+        await tl.to(visualNode, { duration: 0.5, toggleClass: 'highlight', ease: 'power1.inOut', scale: 1 , backgroundColor:"#FFFFFF" , color:"#2A2D2E" });
     }
 
     // Step 2: Shift nodes to make space
@@ -225,7 +225,7 @@ export async function handleRemoveByValue(listVisArea, value, setHistoryList, hi
 
     while (currentNode !== null) {
         const visualNode = allNodes[count];
-        await tl.to(visualNode, { duration: 0.5, toggleClass: 'highlight', ease: 'power1.inOut', scale: 1.2 , backgroundColor:"#00D3F3" , color:"black" });
+        await tl.to(visualNode, { duration: 0.5, toggleClass: 'highlight', ease: 'power1.inOut', scale: 1.2 , backgroundColor:"#f2f4f4" , color:"#5f5e5e" });
 
         if (currentNode.data == value) {
             found = true;
@@ -233,7 +233,7 @@ export async function handleRemoveByValue(listVisArea, value, setHistoryList, hi
             await tl.to(visualNode, { duration: 0.8, y: 100, opacity: 0, ease: "power1.in" });
             break;
         }
-        await tl.to(visualNode, { duration: 0.5, toggleClass: 'highlight', ease: 'power1.inOut', scale: 1 , backgroundColor:"#04060A" , color:"white" });
+        await tl.to(visualNode, { duration: 0.5, toggleClass: 'highlight', ease: 'power1.inOut', scale: 1 , backgroundColor:"#FFFFFF" , color:"#2A2D2E" });
         currentNode = currentNode.next;
         count++;
     }
@@ -275,15 +275,15 @@ export async function handleSearchForValue(listVisArea, value, setHistoryList, h
 
     while (currentNode !== null) {
         const visualNode = allNodes[count];
-        await tl.to(visualNode, { duration: 0.5, toggleClass: 'highlight', ease: 'power1.inOut', scale: 1.2 , backgroundColor:"#00D3F3" , color:"black"});
+        await tl.to(visualNode, { duration: 0.5, toggleClass: 'highlight', ease: 'power1.inOut', scale: 1.2 , backgroundColor:"#f2f4f4" , color:"#5f5e5e"});
 
         if (currentNode.data == value) {
             found = true;
             await tl.to(visualNode, { duration: 0.5, scale: 1.3, ease: 'power2.out' })
-                    .to(visualNode, { duration: 0.5, toggleClass: 'highlight', ease: 'power1.inOut', scale: 1 , backgroundColor:"#04060A" , color:"white"});
+                    .to(visualNode, { duration: 0.5, toggleClass: 'highlight', ease: 'power1.inOut', scale: 1 , backgroundColor:"#FFFFFF" , color:"#2A2D2E"});
             break;
         }
-        await tl.to(visualNode, { duration: 0.5, toggleClass: 'highlight', ease: 'power1.inOut', scale: 1 , backgroundColor:"#04060A" , color:"white"});
+        await tl.to(visualNode, { duration: 0.5, toggleClass: 'highlight', ease: 'power1.inOut', scale: 1 , backgroundColor:"#FFFFFF" , color:"#2A2D2E"});
         currentNode = currentNode.next;
         count++;
     }
