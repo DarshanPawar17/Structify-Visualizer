@@ -51,65 +51,61 @@ const ChatCard = () => {
   }, [current, chats.length]);
 
   return (
-    <div className="h-full flex flex-col justify-between p-4 text-white">
+    <div className="h-full w-full min-h-[400px] flex flex-col justify-between p-8 bg-surface-container-lowest shadow-[0_20px_60px_rgba(45,52,53,0.15)] rounded-md border-2 border-primary/20 relative overflow-hidden text-on-surface font-sans transition-all duration-300 hover:border-primary/50 hover:shadow-[0_30px_70px_rgba(45,52,53,0.2)]">
+      {/* Decorative Top Highlight */}
+      <div className="absolute top-0 left-0 w-full h-1 bg-primary"></div>
+
       {/* Header */}
-      <div className="flex justify-between items-center">
-        <div className="flex gap-2">
-          <div className="bg-[#042033] py-3 px-3 rounded-xl">
-            <span className="bi bi-robot text-[#3ED0FF]"></span>
+      <div className="flex justify-between items-center pb-6 border-b border-outline-variant mt-2">
+        <div className="flex gap-4 items-center">
+          <div className="bg-surface-container-low p-3 rounded-sm">
+            <span className="bi bi-robot text-primary flex"></span>
           </div>
           <div>
-            <div className="text-lg font-semibold">Structify AI</div>
-            <p className="text-[13px] text-gray-400">
-              Specialized Data Structure Assistant
+            <div className="title-md">Structify AI</div>
+            <p className="label-sm text-on-surface opacity-60">
+              Diagnostic Assistant
             </p>
           </div>
         </div>
-        <span className="text-[#3ED0FF] text-sm flex items-center gap-1">
-          <span className="bi bi-stars"></span> Live
+        <span className="label-sm text-primary flex items-center gap-1">
+          <span className="bi bi-circle-fill text-[8px] animate-pulse"></span> Active
         </span>
       </div>
 
       {/* Chat Content */}
-      <div className="relative flex-1 my-4 overflow-hidden">
+      <div className="relative flex-1 my-8 overflow-hidden flex flex-col justify-center">
         {/* Question */}
-        <div className="flex items-start gap-3">
-          <div className="bg-[#1E293B] py-1 px-2 rounded-4xl">
-            <span className="bi bi-chat-left text-white text-base"></span>
-          </div>
-          <div className="bg-[#16202D] p-3 rounded-lg mb-3 w-full">
-            <p className="font-medium">{chats[current].question}</p>
-            <span className="text-sm text-[#3ED0FF]">
-              {chats[current].tag}
+        <div className="flex flex-col items-start gap-2 mb-6 w-full">
+          <span className="label-sm text-on-surface opacity-60">Query System</span>
+          <div className="bg-surface-container-low px-6 py-4 rounded-sm w-full border-l-2 border-primary">
+            <p className="body-md">{chats[current].question}</p>
+            <span className="label-sm text-primary mt-2 block tracking-widest">
+              TARGET: {chats[current].tag}
             </span>
           </div>
         </div>
 
         {/* Answer (fade/slide in & out) */}
         <div
-          className={`flex items-start gap-3 transform transition-all duration-700 ${
+          className={`flex flex-col items-start gap-2 transform transition-all duration-700 w-full ${
             showAnswer
               ? "opacity-100 translate-y-0"
               : "opacity-0 translate-y-6"
           }`}
         >
-          <div className="bg-[#072234] py-1 px-2 rounded-4xl">
-            <span className="bi bi-cpu text-[#00D4FF] text-base"></span>
-          </div>
-          <div className="bg-[#0F2029] text-white p-3 rounded-lg flex-1 font-semibold">
-            <p className="text-sm">{chats[current].answer}</p>
-            <div className="block text-xs text-[#3ED0FF] mt-2">
-              • Structify AI
-            </div>
+          <span className="label-sm text-on-surface opacity-60 text-right w-full">Response</span>
+          <div className="bg-surface px-6 py-4 rounded-sm w-full border border-outline-variant">
+            <p className="body-md">{chats[current].answer}</p>
           </div>
         </div>
       </div>
 
       {/* CTA Button */}
-      <div>
-        <button className="w-full bg-[#020817] hover:bg-[#3ED0FF] hover:text-black border border-gray-700 px-4 py-2 rounded-lg text-gray-200 font-semibold transition-colors flex items-center justify-center gap-2 cursor-pointer">
-          <span className="bi bi-box-arrow-up-right"></span>
-          Try Structify AI in Visualizers
+      <div className="mt-auto pt-6 border-t border-outline-variant">
+        <button className="w-full bg-primary hover:bg-primary-dim px-4 py-3 rounded-sm text-on-primary title-md transition-colors flex items-center justify-center gap-3 cursor-pointer shadow-ambient">
+          <span className="bi bi-arrow-right"></span>
+          Test AI Simulator
         </button>
       </div>
     </div>

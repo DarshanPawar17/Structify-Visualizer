@@ -1,16 +1,21 @@
-import React from 'react'
+import { useSound } from "../../hooks/useSound";
 
 const FeatureBox = ({ percentage, text }) => {
+  const { playSound } = useSound();
+
   return (
-    <div className="flex flex-col items-center justify-center bg-[#090E18] rounded-xl py-4 px-10 shadow-lg w-full max-w-sm mx-auto border-[1px] border-gray-800">
-      <div className="text-xl sm:text-2xl font-bold mb-1 text-[#00D4FF] transform transition-transform duration-300 hover:scale-110 w-full text-center ">
+    <div 
+      onMouseEnter={() => playSound('hover')}
+      className="flex flex-col items-start justify-center bg-surface-container-lowest rounded-sm p-8 shadow-ambient w-full border-none transition-colors duration-200 hover:bg-surface-container-low cursor-default font-sans group"
+    >
+      <div className="display-lg text-primary mb-2 transition-colors duration-300 group-hover:text-on-surface">
         {percentage}
       </div>
-      <div className="text-xs sm:text-xs font-medium text-gray-400 w-full text-center">
+      <div className="label-sm text-on-surface opacity-80 mt-1">
         {text}
       </div>
     </div>
   );
-}
+};
 
-export default FeatureBox
+export default FeatureBox;

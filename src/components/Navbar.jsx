@@ -6,40 +6,46 @@ const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
-    <nav className="h-16 flex justify-between items-center px-6 border-b border-gray-800 sticky top-0 z-50 
-  backdrop-blur-md bg-[#030A17]/70">
+    <nav className="h-20 flex justify-between items-center px-8 sm:px-16 border-none sticky top-0 z-50 
+  glass-surface font-sans shadow-ambient">
       {/* Logo */}
-      <Link to="/" id="Logo" className="font-bold text-white flex items-center text-xl gap-1 cursor-pointer">
+      <Link to="/" id="Logo" className="headline-md text-on-surface flex items-center gap-2 cursor-pointer font-extrabold tracking-tighter">
         <div>
-          <span className="bi bi-chevron-left text-[#45CFFF]"></span>
-          <span className="bi bi-chevron-right text-[#45CFFF]"></span>
+          <span className="bi bi-chevron-left text-primary"></span>
+          <span className="bi bi-chevron-right text-primary"></span>
         </div>
         Structify
       </Link>
 
       {/* Desktop Menu */}
-      <div className="hidden md:flex items-center space-x-8">
-        <Link to="/features" className="text-gray-500 hover:text-[#45CFFF] transition-colors">
+      <div className="hidden md:flex items-center space-x-12">
+        <Link to="/" className="label-sm text-on-surface opacity-60 hover:opacity-100 transition-opacity">
           Features
         </Link>
-        <HashLink smooth to="/#DataStructure" className="text-gray-500 hover:text-[#45CFFF] transition-colors">
+        <Link to="/data-structures" className="label-sm text-on-surface opacity-60 hover:opacity-100 transition-opacity">
           Data Structures
-        </HashLink>
-        <HashLink smooth to="/#ai" className="text-gray-500 hover:text-[#45CFFF] transition-colors">
+        </Link>
+        <HashLink smooth to="/#ai" className="label-sm text-on-surface opacity-60 hover:opacity-100 transition-opacity">
           Structify AI
         </HashLink>
+        <Link to="/about" className="label-sm text-on-surface opacity-60 hover:opacity-100 transition-opacity">
+          About
+        </Link>
       </div>
 
-      {/* Documentation Button */}
-      <div id="documentation" className="hidden md:block">
-        <Link className="border border-gray-400 px-4 py-2 rounded-lg text-gray-200 text-base flex items-center gap-2 hover:bg-[#3ED0FF] hover:text-black transition-colors hover:border-blue-500 cursor-pointer font-semibold" to="/documentation">
-          <span className="bi bi-book"></span> Documentation
+      {/* Right Side: Sign In + Documentation */}
+      <div id="auth-area" className="hidden md:flex items-center gap-8">
+        <Link to="/signin" className="label-sm text-on-surface opacity-60 hover:opacity-100 transition-opacity">
+          Sign In
+        </Link>
+        <Link className="bg-[#5f5e5e] border border-[#5f5e5e] px-7 py-2.5 text-[0.6rem] font-bold tracking-[0.15em] uppercase hover:bg-[#4a4949] transition-colors cursor-pointer" style={{ color: '#fff' }} to="/documentation">
+          Documentation
         </Link>
       </div>
 
       {/* Mobile Menu Button */}
       <button
-        className="md:hidden text-gray-400 text-2xl cursor-pointer"
+        className="md:hidden text-on-surface text-2xl cursor-pointer"
         onClick={() => setIsOpen(!isOpen)}
       >
         {isOpen ? <span className="bi bi-x"></span> : <span className="bi bi-list"></span>}
@@ -47,34 +53,54 @@ const Navbar = () => {
 
       {/* Mobile Dropdown */}
       <div
-        className={`absolute top-16 left-0 w-full bg-[#030A17]/80 backdrop-blur-lg border-b border-gray-800 flex flex-col items-center space-y-4 overflow-hidden transition-all duration-500 ease-in-out md:hidden ${
-          isOpen ? "max-h-96 py-4" : "max-h-0 py-0"
+        className={`absolute top-20 left-0 w-full glass-surface flex flex-col items-center space-y-6 overflow-hidden transition-all duration-500 ease-in-out md:hidden shadow-ambient ${
+          isOpen ? "max-h-96 py-8" : "max-h-0 py-0"
         }`}
       >
-        <a
-          href="#/features"
-          className="text-gray-500 hover:text-[#45CFFF] transition-colors"
+        <Link
+          to="/"
+          className="label-sm text-on-surface opacity-60 hover:opacity-100 transition-opacity"
           onClick={() => setIsOpen(false)}
         >
           Features
-        </a>
-        <a
-          href="#structures"
-          className="text-gray-500 hover:text-[#45CFFF] transition-colors"
+        </Link>
+        <Link
+          to="/data-structures"
+          className="label-sm text-on-surface opacity-60 hover:opacity-100 transition-opacity"
           onClick={() => setIsOpen(false)}
         >
           Data Structures
-        </a>
-        <a
-          href="#ai"
-          className="text-gray-500 hover:text-[#45CFFF] transition-colors"
+        </Link>
+        <HashLink
+          smooth
+          to="/#ai"
+          className="label-sm text-on-surface opacity-60 hover:opacity-100 transition-opacity"
           onClick={() => setIsOpen(false)}
         >
           Structify AI
-        </a>
-        <button className="border border-gray-400 px-4 py-2 rounded-lg text-gray-200 text-base flex items-center gap-2 hover:bg-[#3ED0FF] hover:text-black transition-colors hover:border-blue-500 cursor-pointer font-semibold">
-          <span className="bi bi-book"></span> Documentation
-        </button>
+        </HashLink>
+        <Link
+          to="/about"
+          className="label-sm text-on-surface opacity-60 hover:opacity-100 transition-opacity"
+          onClick={() => setIsOpen(false)}
+        >
+          About
+        </Link>
+        <Link
+          to="/signin"
+          className="label-sm text-on-surface opacity-60 hover:opacity-100 transition-opacity"
+          onClick={() => setIsOpen(false)}
+        >
+          Sign In
+        </Link>
+        <Link
+          to="/documentation"
+          className="bg-[#5f5e5e] border border-[#5f5e5e] px-6 py-2.5 text-[0.6rem] font-bold tracking-[0.15em] uppercase w-[80%] text-center"
+          style={{ color: '#fff' }}
+          onClick={() => setIsOpen(false)}
+        >
+          Documentation
+        </Link>
       </div>
     </nav>
   );

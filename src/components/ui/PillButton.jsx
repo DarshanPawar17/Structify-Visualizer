@@ -1,10 +1,15 @@
-import React from "react";
+import { useSound } from "../../hooks/useSound";
 
 const PillButton = ({ icon, text }) => {
+  const { playSound } = useSound();
+
   return (
-    <button className="flex items-center gap-2 border border-cyan-500 text-cyan-400 px-4 py-1 rounded-full font-medium bg-[#041F2F] text-sm">
+    <button 
+      onMouseEnter={() => playSound('hover')}
+      className="flex items-center gap-2 border-none text-on-primary px-6 py-2.5 rounded-sm font-semibold bg-primary font-sans cursor-default transition-colors hover:bg-primary-dim shadow-ambient"
+    >
       <span className={`text-lg ${icon}`}></span>
-      <span>{text}</span>
+      <span className="title-md">{text}</span>
     </button>
   );
 };

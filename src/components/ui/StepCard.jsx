@@ -2,38 +2,23 @@
 export default function StepCard({ icon, title, description, step }) {
   return (
     <div
-      className="bg-[#0A0F1E] rounded-xl p-5 flex items-start justify-between w-full max-w-lg shadow-md 
-                 hover:shadow-lg hover:bg-[#0A2330] transition-all duration-300 group border-[1px] border-gray-800"
+      className="bg-surface-container-lowest rounded-sm p-8 flex items-start justify-between w-full max-w-lg shadow-ambient 
+                 hover:bg-surface-container-low transition-colors duration-200 border-none group font-sans"
     >
       {/* Left Section: Icon + Text */}
-      <div className="flex items-start gap-4">
-        {/* Icon Box */}
-        <div
-          className="p-3 rounded-lg flex items-center justify-center bg-[#0D1628] 
-                     transition-colors duration-300 group-hover:bg-[#064559]"
-        >
-          <span
-            className={`${icon} text-2xl text-gray-400 transition-colors duration-300 group-hover:text-[#00D4FF]`}
-          ></span>
-        </div>
-
-        {/* Title + Description */}
+      <div className="flex items-start gap-6">
+        <span className={`${icon} text-2xl text-primary mt-1 opacity-80 group-hover:opacity-100 transition-opacity`}></span>
         <div>
-          <h3
-            className="text-white font-semibold text-lg transition-colors duration-300 group-hover:text-[#00BBD6]"
-          >
+          <h3 className="title-md text-on-surface mb-2">
             {title}
           </h3>
-          <p className="text-gray-400 text-sm mt-1">{description}</p>
+          <p className="body-md text-on-surface opacity-80">{description}</p>
         </div>
       </div>
 
       {/* Step Number */}
-      <div
-        className="bg-[#1B2236] w-8 h-8 flex items-center justify-center rounded-full text-gray-400 font-medium 
-                   transition-colors duration-300 group-hover:bg-[#00D4FF] group-hover:text-black"
-      >
-        {step}
+      <div className="label-sm text-primary opacity-40 pt-2 transition-opacity group-hover:opacity-100">
+        0{step}
       </div>
     </div>
   );
