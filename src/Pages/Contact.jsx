@@ -3,165 +3,149 @@ import Navbar from '../components/Navbar'
 import Footer from '../components/Footer'
 
 const Contact = () => {
+  // Inject the Google Fonts for consistent typography
+  React.useEffect(() => {
+    if (!document.getElementById('contact-fonts')) {
+      const link = document.createElement('link');
+      link.id = 'contact-fonts';
+      link.href = 'https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Playfair+Display:ital,wght@0,400;1,400&display=swap';
+      link.rel = 'stylesheet';
+      document.head.appendChild(link);
+    }
+  }, []);
+
   return (
-    <div style={{backgroundColor:"#0A1018" , height:"100%"}}>
+    <div className="w-full bg-white text-on-surface overflow-x-hidden font-sans">
       <Navbar />
-      <div className='mt-16 flex flex-col text-center gap-6'>
-        <div className='text-white text-5xl font-bold'>Get in Touch</div>
-        <div className='text-gray-500 text-xl flex justify-center w-full'>
-          <div className='w-[55%]'>
-            Have a question, suggestion, or just want to say hello? I'd love to hear from you!
-          </div>
+
+      {/* Header Section */}
+      <section className="py-24 px-8 text-center border-b border-[#EBEBEB]">
+        <div className="mb-8">
+          <span className="text-[0.6rem] font-bold tracking-[0.25em] uppercase" style={{ color: '#886d52' }}>Connect with Us</span>
         </div>
-      </div>
-      <div className='mt-12 flex mx-16 gap-16 mb-20'>
-        <div className='bg-[#050B16] h-[550px] w-[725px] rounded-xl border-[1px] border-gray-800'>
-          <div className='m-6'>
-            <span className='bi bi-chat-left text-2xl text-[#00D4FF]'></span>
-            <span className='ml-2 text-2xl text-white font-semibold'> Send a Message</span>
-          </div>
+        <h1 className="text-[#2A2D2E] text-5xl sm:text-6xl lg:text-[4.5rem] tracking-tight mb-8" style={{ fontFamily: '"Playfair Display", serif', lineHeight: '1.1' }}>
+          Get in Touch
+        </h1>
+        <p className="text-[#717171] text-[1.15rem] italic max-w-2xl mx-auto" style={{ fontFamily: '"Cormorant Garamond", serif' }}>
+          Have a question, suggestion, or just want to say hello? Our architects are ready to assist you.
+        </p>
+      </section>
+
+      {/* Main Content: Info + Form Grid */}
+      <section className="w-full max-w-[1400px] mx-auto grid grid-cols-1 lg:grid-cols-12 gap-0 border-b border-[#EBEBEB]">
+        
+        {/* Left Side: Contact Information (4 columns) */}
+        <div className="lg:col-span-4 p-12 lg:p-24 bg-[#F7F9F9] lg:border-r border-[#EBEBEB] flex flex-col gap-16">
+          
           <div>
-            <form>
-              <div className='flex w-full gap-5 px-6 justify-start'>
-                <div className='flex flex-col w-full gap-2'>
-                  <label htmlFor="name" className='text-white text-base'>Name</label>
-                  <input type="text" placeholder='Your full name' className='bg-[#020817] border-[1px] border-gray-800 rounded-lg p-2 text-gray-300 text-sm' id='name'/>
-                </div>
-                <div className='flex flex-col w-full gap-2'>
-                  <label htmlFor="mail" className='text-white text-base'>Email</label>
-                  <input type="email" placeholder='your@email.com' className='bg-[#020817] border-[1px] border-gray-800 rounded-lg p-2 text-gray-300 text-sm' id='mail'/>
+            <h3 className="text-[#2A2D2E] text-[0.65rem] font-bold tracking-[0.2em] uppercase mb-8">Contact Information</h3>
+            <div className="flex flex-col gap-10">
+              <div className="flex gap-6 items-start">
+                <i className="bi bi-envelope text-[#886d52] text-xl"></i>
+                <div>
+                  <div className="text-[#2A2D2E] text-[0.8rem] font-bold uppercase tracking-wider mb-1">Email</div>
+                  <div className="text-[#717171] text-[0.9rem]">pawardarshan987@gmail.com</div>
                 </div>
               </div>
-              <div className='flex w-full px-6 justify-start mt-5'>
-                <div className='flex flex-col w-full gap-2'>
-                  <label htmlFor="subject" className='text-white text-base'>Subject</label>
-                  <input type="text" placeholder="What's this about?" className='bg-[#020817] border-[1px] border-gray-800 rounded-lg p-2 text-gray-300 text-sm' id='subject'/>
+              <div className="flex gap-6 items-start">
+                <i className="bi bi-geo-alt text-[#886d52] text-xl"></i>
+                <div>
+                  <div className="text-[#2A2D2E] text-[0.8rem] font-bold uppercase tracking-wider mb-1">Location</div>
+                  <div className="text-[#717171] text-[0.9rem]">Chhatrapati Sambhajinagar, MH</div>
                 </div>
               </div>
-              <div className='flex w-full px-6 justify-start mt-5'>
-                <div className='flex flex-col w-full gap-2'>
-                  <label htmlFor="message" className='text-white text-base'>Message</label>
-                  <textarea placeholder="Tell me more..." className='bg-[#020817] border-[1px] border-gray-800 rounded-lg p-2 text-gray-300 text-sm' id='message' rows={7}/>
+              <div className="flex gap-6 items-start">
+                <i className="bi bi-clock text-[#886d52] text-xl"></i>
+                <div>
+                  <div className="text-[#2A2D2E] text-[0.8rem] font-bold uppercase tracking-wider mb-1">Inquiry Time</div>
+                  <div className="text-[#717171] text-[0.9rem]">Response within 24 hours</div>
                 </div>
               </div>
-              <div className='bg-[#00D4FF] py-2 mt-5 mx-6 rounded-lg text-center cursor-pointer'>
-                <span className='bi bi-send font-semibold text-lg'> Send Message</span>
-              </div>
-            </form>
+            </div>
           </div>
+
+          <div>
+            <h3 className="text-[#2A2D2E] text-[0.65rem] font-bold tracking-[0.2em] uppercase mb-8">Follow My Work</h3>
+            <div className="flex flex-col gap-4">
+              <a href="https://github.com/DarshanPawar17" target="_blank" rel="noreferrer" className="text-[#717171] text-[0.9rem] hover:text-[#2A2D2E] flex items-center gap-3 transition-colors">
+                <i className="bi bi-github"></i> @DarshanPawar17
+              </a>
+              <a href="https://www.linkedin.com/in/darshan-jagdish-pawar-9b9701298" target="_blank" rel="noreferrer" className="text-[#717171] text-[0.9rem] hover:text-[#2A2D2E] flex items-center gap-3 transition-colors">
+                <i className="bi bi-linkedin"></i> Darshan Pawar
+              </a>
+              <a href="https://leetcode.com/u/Darshan_Pawar_17/" target="_blank" rel="noreferrer" className="text-[#717171] text-[0.9rem] hover:text-[#2A2D2E] flex items-center gap-3 transition-colors">
+                <i className="bi bi-code-slash"></i> LeetCode
+              </a>
+            </div>
+          </div>
+
         </div>
-        <div className='flex flex-col gap-10'>
-          <div className='bg-[#060C17] h-[250px] w-[350px] rounded-xl border-[1px] border-gray-800'>
-            <div className='text-white text-xl font-semibold mt-4 mx-5'>
-              Contact Information
-            </div>
-            <div className='flex mx-5 mt-5 gap-3'>
-              <div className='h-full mt-2'>
-                <span className='bi bi-envelope text-[#00D4FF] text-xl'></span>
+
+        {/* Right Side: Message Form (8 columns) */}
+        <div className="lg:col-span-8 p-12 lg:p-24 bg-white">
+          <form className="flex flex-col gap-12 max-w-2xl">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
+              <div className="flex flex-col gap-4">
+                <label htmlFor="name" className="text-[#2A2D2E] text-[0.65rem] font-bold tracking-[0.2em] uppercase">Your Name</label>
+                <input 
+                  type="text" 
+                  id="name" 
+                  placeholder="e.g. Julian Vane" 
+                  className="bg-transparent border-b border-[#EBEBEB] py-3 text-[1rem] focus:border-[#2A2D2E] outline-none transition-colors placeholder:text-[#E0E0E0]"
+                />
               </div>
-              <div>
-                <div className='text-white font-semibold'>
-                  Email
-                </div>
-                <div className='text-gray-500 text-sm'>
-                  pawardarshan987@gmail.com
-                </div>
-              </div>
-            </div>
-            <div className='flex mx-5 mt-3 gap-3'>
-              <div className='h-full mt-2'>
-                <span className='bi bi-geo-alt text-[#00D4FF] text-xl'></span>
-              </div>
-              <div>
-                <div className='text-white font-semibold'>
-                  Location
-                </div>
-                <div className='text-gray-500 text-sm'>
-                  Chhatrapati Sambhajinagar, Maharashtra
-                </div>
+              <div className="flex flex-col gap-4">
+                <label htmlFor="email" className="text-[#2A2D2E] text-[0.65rem] font-bold tracking-[0.2em] uppercase">Email Address</label>
+                <input 
+                  type="email" 
+                  id="email" 
+                  placeholder="e.g. julian@arch.com" 
+                  className="bg-transparent border-b border-[#EBEBEB] py-3 text-[1rem] focus:border-[#2A2D2E] outline-none transition-colors placeholder:text-[#E0E0E0]"
+                />
               </div>
             </div>
-            <div className='flex mx-5 mt-3 gap-3'>
-              <div className='h-full mt-2'>
-                <span className='bi bi-clock text-[#00D4FF] text-xl'></span>
-              </div>
-              <div>
-                <div className='text-white font-semibold'>
-                  Response Time
-                </div>
-                <div className='text-gray-500 text-sm'>
-                  Usually within 24 hours
-                </div>
-              </div>
+
+            <div className="flex flex-col gap-4">
+              <label htmlFor="subject" className="text-[#2A2D2E] text-[0.65rem] font-bold tracking-[0.2em] uppercase">Subject</label>
+              <input 
+                type="text" 
+                id="subject" 
+                placeholder="Inquiry regarding visualization" 
+                className="bg-transparent border-b border-[#EBEBEB] py-3 text-[1rem] focus:border-[#2A2D2E] outline-none transition-colors placeholder:text-[#E0E0E0]"
+              />
             </div>
-          </div>
-          <div className='bg-[#060C17] h-[325px] w-[350px] rounded-xl border-[1px] border-gray-800'>
-            <div className='text-white text-xl font-semibold mt-4 mx-5'>
-              Follow Me
+
+            <div className="flex flex-col gap-4">
+              <label htmlFor="message" className="text-[#2A2D2E] text-[0.65rem] font-bold tracking-[0.2em] uppercase">Message</label>
+              <textarea 
+                id="message" 
+                placeholder="How can our logic serve your project?" 
+                rows={6}
+                className="bg-transparent border-b border-[#EBEBEB] py-3 text-[1rem] focus:border-[#2A2D2E] outline-none transition-colors placeholder:text-[#E0E0E0] resize-none"
+              />
             </div>
-            <div className='flex mx-5 mt-5 gap-3 rounded-lg px-3 py-[12px] hover:bg-[#0c3949] cursor-pointer'>
-              <div className='h-full mt-2'>
-                <span className='bi bi-github text-[#00D4FF] text-2xl'></span>
-              </div>
-              <a href="https://github.com/DarshanPawar17" target='new'>
-                <div>
-                  <div className='text-white font-semibold'>
-                    Github
-                  </div>
-                  <div className='text-gray-500 text-sm'>
-                    @DarshanPawar17
-                  </div>
-                </div>
-              </a>
-            </div>
-            <div className='flex mx-5 mt-3 gap-3 rounded-lg px-3 py-[12px] hover:bg-[#0c3949] cursor-pointer'>
-              <div className='h-full mt-2'>
-                <span className='bi bi-linkedin text-[#00D4FF] text-xl'></span>
-              </div>
-              <a href="https://www.linkedin.com/in/darshan-jagdish-pawar-9b9701298" target='new'>
-                <div>
-                  <div className='text-white font-semibold'>
-                    LinkedIn
-                  </div>
-                  <div className='text-gray-500 text-sm'>
-                    Darshan Pawar
-                  </div>
-                </div>
-              </a>
-            </div>
-            <div className='flex mx-5 mt-3 gap-3 rounded-lg px-3 py-[12px] hover:bg-[#0c3949] cursor-pointer'>
-              <div className='h-full mt-2'>
-                <span className='bi bi-code-slash text-[#00D4FF] text-xl'></span>
-              </div>
-              <a href="https://leetcode.com/u/Darshan_Pawar_17/" target='new'>
-                <div>
-                  <div className='text-white font-semibold'>
-                    LeetCode
-                  </div>
-                  <div className='text-gray-500 text-sm'>
-                    @Darshan_Pawar_17
-                  </div>
-                </div>
-              </a>
-            </div>
-          </div>
-          <div className='bg-[#020817] h-[160px] w-[350px] rounded-xl border-[1px] border-gray-800'>
-            <div className='text-white text-xl font-semibold text-center mt-3'>
-              Quick Question?
-            </div>
-            <div className='flex justify-center mt-2'>
-              <div className='text-gray-400 text-sm w-[80%] text-center'>
-                For quick questions or feedback, feel free to reach out directly!
-              </div>
-            </div>
-            <div className='px-5 mt-3'>
-              <button className='text-white text-sm font-bold border-[1px] border-gray-800 py-2 w-full rounded-lg cursor-pointer hover:bg-[#00D4FF] hover:text-black'>
-                <span className='bi bi-envelope'> Send Quick Email</span>
+
+            <div className="mt-8">
+              <button 
+                type="submit" 
+                className="bg-[#5f5e5e] text-[0.65rem] font-bold tracking-[0.15em] uppercase px-16 py-5 hover:bg-[#4a4949] transition-colors border-none cursor-pointer"
+                style={{ color: '#fff' }}
+              >
+                Send Inquiry
               </button>
             </div>
-          </div>
+          </form>
         </div>
-      </div>
+
+      </section>
+
+      {/* Decorative Final Quote */}
+      <section className="bg-white py-32 flex flex-col items-center justify-center text-center">
+         <div className="text-[#F0F0F0] text-[8rem] leading-none select-none pointer-events-none" style={{ fontFamily: '"Playfair Display", serif' }}>
+           &
+         </div>
+      </section>
+
       <Footer />
     </div>
   )

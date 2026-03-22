@@ -6,9 +6,10 @@ const DataStructureCard = ({ icon, title, complexity, description, dataStructure
   const { playSound } = useSound();
 
   return (
-    <div 
+    <Link 
+      to={`/visualization/${dataStructure.replace(/\s+/g, "")}`}
       onMouseEnter={() => playSound('hover')}
-      className="group flex flex-col bg-surface-container-lowest rounded-sm shadow-ambient w-full border-none transition-all duration-300 ease-out hover:bg-surface-container-low hover:-translate-y-2 hover:shadow-[0_20px_40px_rgba(45,52,53,0.15)] cursor-pointer overflow-hidden font-sans"
+      className="group flex flex-col bg-surface-container-lowest rounded-sm shadow-ambient w-full border-none cursor-pointer overflow-hidden font-sans premium-hover hover:bg-surface-container-low transition-colors duration-300 no-underline"
     >
       {/* Animated Video Thumbnail Header */}
       <div className="w-full h-48 relative overflow-hidden border-b border-outline-variant flex items-center justify-center bg-surface-container-low">
@@ -29,14 +30,14 @@ const DataStructureCard = ({ icon, title, complexity, description, dataStructure
         <h2 className="headline-md text-on-surface mb-3">{title}</h2>
         <p className="body-md text-on-surface opacity-80 mb-4">{description}</p>
         
-        <Link to={`/visualization/${dataStructure.replace(/\s+/g, "")}`} className="w-full mt-2 block">
+        <div className="w-full mt-2 block">
           <div className="flex items-center justify-between border-t border-outline-variant pt-4 transition-colors group-hover:border-primary">
             <span className="title-md text-on-surface group-hover:text-primary transition-colors">Explore Structure</span>
             <span className="bi bi-arrow-right text-on-surface group-hover:text-primary transition-colors transform group-hover:translate-x-2"></span>
           </div>
-        </Link>
+        </div>
       </div>
-    </div>
+    </Link>
   );
 };
 

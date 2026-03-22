@@ -86,7 +86,7 @@ const Index = () => {
           <div className="w-full grid grid-cols-1 lg:grid-cols-3 border border-[#EBEBEB]">
             
             {/* Column 1: See It -> /features */}
-            <Link to="/features" className="p-10 lg:p-14 flex flex-col gap-6 lg:border-r border-[#EBEBEB] bg-white group hover:bg-[#FDFDFD] transition-colors cursor-pointer outline-none">
+            <Link to="/features" className="p-10 lg:p-14 flex flex-col gap-6 lg:border-r border-[#EBEBEB] bg-white group hover:bg-[#FDFDFD] transition-colors cursor-pointer outline-none premium-hover">
               <div>
                 <i className="bi bi-eye text-[#2A2D2E] text-2xl mb-8 block opacity-80"></i>
                 <h3 className="text-[#2A2D2E] text-[1.75rem] mb-6" style={{ fontFamily: '"Playfair Display", serif' }}>See It</h3>
@@ -114,7 +114,7 @@ const Index = () => {
             </Link>
 
             {/* Column 3: Understand It -> /documentation */}
-            <Link to="/documentation" className="p-10 lg:p-14 flex flex-col gap-6 lg:border-l border-[#EBEBEB] bg-white group hover:bg-[#FDFDFD] transition-colors cursor-pointer outline-none">
+            <Link to="/documentation" className="p-10 lg:p-14 flex flex-col gap-6 lg:border-l border-[#EBEBEB] bg-white group hover:bg-[#FDFDFD] transition-colors cursor-pointer outline-none premium-hover">
               <div>
                 <i className="bi bi-lightbulb text-[#2A2D2E] text-2xl mb-8 block opacity-80"></i>
                 <h3 className="text-[#2A2D2E] text-[1.75rem] mb-6" style={{ fontFamily: '"Playfair Display", serif' }}>Understand It</h3>
@@ -137,7 +137,7 @@ const Index = () => {
           {/* Left Column: Chat Card contained in the elegant framed box */}
           <div className="w-full lg:w-1/2 relative flex justify-center items-center">
             {/* The white perfectly square container with deep shadow */}
-            <div className="w-full max-w-[500px] aspect-square bg-white shadow-[0_20px_60px_rgba(45,52,53,0.06)] relative flex items-center justify-center p-8 sm:p-12">
+            <div className="w-full max-w-[500px] aspect-square bg-white shadow-[0_20px_60px_rgba(45,52,53,0.06)] relative flex items-center justify-center p-8 sm:p-12 premium-hover">
               {/* Top-Left Corner Bracket */}
               <div className="absolute top-8 left-8 w-12 h-12 border-t-[1px] border-l-[1px] border-[#D1D5DB]"></div>
               {/* Bottom-Right Corner Bracket */}

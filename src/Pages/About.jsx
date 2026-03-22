@@ -4,99 +4,142 @@ import { Link } from 'react-router-dom'
 import Footer from '../components/Footer'
 
 const About = () => {
+  // Inject Playfair + Cormorant fonts
+  React.useEffect(() => {
+    if (!document.getElementById('about-fonts')) {
+      const link = document.createElement('link');
+      link.id = 'about-fonts';
+      link.href = 'https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Playfair+Display:ital,wght@0,400;1,400&display=swap';
+      link.rel = 'stylesheet';
+      document.head.appendChild(link);
+    }
+  }, []);
+
   return (
-    <div style={{backgroundColor:"#0A1018" , height:"100%"}}>
+    <div className="w-full bg-surface text-on-surface overflow-x-hidden font-sans">
       <Navbar />
-      <div className='mt-16'>
-        <div className='text-white text-5xl font-bold text-center'>
-          About the Creator
-        </div>
-        <div className='flex w-full justify-center mt-8'>
-          <div className='text-xl text-gray-500 w-[50%] text-center'>
-            Learn about the person behind Structify and the mission to make data structures accessible to everyone.
-          </div>
-        </div>
-      </div>
-      <div className='flex mt-16 justify-center gap-20'>
-        <div>
-          <img src="/images/user_avatar.png" alt="Pawar Avatar" className='h-[324px] w-[263px] rounded-xl object-cover'/>
-        </div>
-        <div>
-          <div className='text-white text-3xl font-bold'>
-            Darshan Pawar
-          </div>
-          <div className='text-[#00D4FF] text-xl font-semibold mt-4'>
-            Full-Stack Developer & CS Student
-          </div>
-          <div className='w-[400px] text-gray-400 mt-4'>
-            I'm Darshan Pawar, a CS student and coding enthusiast. I built this Data Structure Visualizer to make learning data structures easier and more interactive. Instead of just reading code, you can now see how it works — step by step, visually. Perfect for beginners, interview prep, or anyone curious about how data structures actually function.
-          </div>
-          <div className='flex gap-5 mt-4'>
-            <div className='bg-[#060C17] py-1 px-3 rounded-lg border-[1px] text-white hover:text-black border-gray-800 hover:bg-[#66CCFF]'>
-              <a href="https://github.com/DarshanPawar17" target='new'>
-                <span className='bi bi-github font-semibold'> GitHub</span>
-              </a>
+
+      {/* Hero Section: 2 Column — Text Left, Photo Right */}
+      <section className="w-full bg-white border-b border-[#EBEBEB]">
+        <div className="w-full max-w-[1400px] mx-auto grid grid-cols-1 lg:grid-cols-2 min-h-[80vh]">
+
+          {/* Left Column: Editorial Text */}
+          <div className="flex flex-col justify-center px-8 sm:px-16 lg:px-24 py-20 lg:py-0">
+            <div className="mb-8">
+              <span className="text-[0.6rem] font-bold tracking-[0.25em] uppercase" style={{ color: '#886d52' }}>About the Creator</span>
             </div>
-            <div className='bg-[#060C17] py-1 px-3 rounded-lg border-[1px] text-white hover:text-black border-gray-800 hover:bg-[#66CCFF]'>
-              <a href="https://www.linkedin.com/in/darshan-jagdish-pawar-9b9701298" target='new'>
-                <span className='bi bi-linkedin font-semibold'> LinkedIn</span>
+
+            <h1 className="text-[#2A2D2E] text-5xl sm:text-6xl lg:text-[4.5rem] tracking-tight mb-6" style={{ fontFamily: '"Playfair Display", serif', lineHeight: '1.1' }}>
+              Darshan Pawar
+            </h1>
+
+            <p className="text-[0.95rem] italic mb-10" style={{ fontFamily: '"Cormorant Garamond", serif', color: '#717171' }}>
+              Full-Stack Developer & Competitive Coder
+            </p>
+
+            <p className="text-[#717171] text-[0.9rem] leading-relaxed max-w-[440px] mb-14">
+              I'm Darshan Pawar, a CS student and coding enthusiast. I built Structify with a singular goal: to make learning data structures easier and more interactive. Instead of just reading code, you can now see how it works — step by step, visually. Perfect for beginners, interview prep, or anyone curious about how data structures actually function.
+            </p>
+
+            {/* Social Links — pill style matching the screenshot */}
+            <div className="flex flex-wrap gap-4">
+              <a href="https://github.com/DarshanPawar17" target="_blank" rel="noreferrer" className="flex items-center gap-3 bg-[#F7F7F7] px-5 py-3 text-[#5f5e5e] text-[0.6rem] font-bold tracking-[0.15em] uppercase hover:bg-[#EBEBEB] transition-colors" style={{ color: '#5f5e5e' }}>
+                <i className="bi bi-github text-sm"></i> GitHub
               </a>
-            </div>
-            <div className='bg-[#060C17] py-1 px-3 rounded-lg border-[1px] text-white hover:text-black border-gray-800 hover:bg-[#66CCFF]'>
-              <a href="https://leetcode.com/u/Darshan_Pawar_17/" target='new'>
-                <span className='bi bi-code-slash font-semibold'> LeetCode</span>
+              <a href="https://www.linkedin.com/in/darshan-jagdish-pawar-9b9701298" target="_blank" rel="noreferrer" className="flex items-center gap-3 bg-[#F7F7F7] px-5 py-3 text-[#5f5e5e] text-[0.6rem] font-bold tracking-[0.15em] uppercase hover:bg-[#EBEBEB] transition-colors" style={{ color: '#5f5e5e' }}>
+                <i className="bi bi-linkedin text-sm"></i> LinkedIn
+              </a>
+              <a href="https://leetcode.com/u/Darshan_Pawar_17/" target="_blank" rel="noreferrer" className="flex items-center gap-3 bg-[#F7F7F7] px-5 py-3 text-[#5f5e5e] text-[0.6rem] font-bold tracking-[0.15em] uppercase hover:bg-[#EBEBEB] transition-colors" style={{ color: '#5f5e5e' }}>
+                <i className="bi bi-code-slash text-sm"></i> LeetCode
               </a>
             </div>
           </div>
+
+          {/* Right Column: Portrait Photo with EST. badge */}
+          <div className="relative flex items-center justify-center px-8 lg:px-16 py-16 lg:py-0">
+            <div className="relative w-[320px] h-[380px] sm:w-[360px] sm:h-[420px] lg:w-[400px] lg:h-[460px] border border-[#EBEBEB] shadow-[0_20px_60px_rgba(45,52,53,0.06)] overflow-hidden">
+              <img
+                src="/images/user_avatar.png"
+                alt="Darshan Pawar"
+                className="w-full h-full object-cover object-top"
+              />
+            </div>
+            {/* EST. Badge */}
+            <div className="absolute bottom-20 lg:bottom-12 right-12 lg:right-8 select-none">
+              <span className="text-[#B0B0B0] text-[0.6rem] font-bold tracking-[0.3em] uppercase">Est. 2024</span>
+            </div>
+          </div>
+
         </div>
-      </div>
-      <div className='flex gap-20 mt-16 justify-center px-44'>
-        <div className='bg-[#050B17] border-[1px] border-gray-800 p-8 rounded-xl'>
-          <div className='flex gap-3 items-center'>
-            <div>
-              <span className='bi bi-heart text-3xl text-[#00D4FF] font-bold'></span>
+      </section>
+
+      {/* Mission & Journey Section */}
+      <section className="bg-[#F7F9F9] py-32 px-8 sm:px-16 lg:px-24 border-t border-[#EBEBEB]">
+        <div className="w-full max-w-[1200px] mx-auto">
+
+          <div className="flex justify-between items-start mb-20 relative">
+            <div className="max-w-2xl z-10">
+              <h2 className="text-[#2A2D2E] text-4xl sm:text-5xl tracking-tight mb-8" style={{ fontFamily: '"Playfair Display", serif', lineHeight: '1.2' }}>
+                The Philosophy
+              </h2>
+              <p className="text-[#717171] leading-relaxed text-[0.95rem] font-sans">
+                Every decision in Structify is guided by a singular principle: clarity through interaction.
+              </p>
             </div>
-            <div className='text-white text-2xl font-semibold'>
-              The Mission
+            <div className="hidden lg:block absolute right-8 top-0 select-none pointer-events-none">
+              <span className="text-[12rem] leading-[0.75]" style={{ fontFamily: '"Playfair Display", serif', color: '#F0F0F0' }}>02</span>
             </div>
           </div>
-          <div className='text-gray-400 mt-3'>
-            Data structures are the foundation of computer science, yet they're often taught in abstract ways that make them hard to grasp. Structify was born from the belief that visual learning and interactive exploration can make these concepts click for students and developers alike.
+
+          {/* 2-Column bordered grid */}
+          <div className="w-full grid grid-cols-1 lg:grid-cols-2 gap-8">
+
+            {/* The Mission */}
+            <div className="p-12 lg:p-16 flex flex-col gap-6 bg-white border border-[#EBEBEB] shadow-[0_4px_20px_rgba(0,0,0,0.02)] premium-hover">
+              <div className="flex gap-4 items-center mb-4">
+                <i className="bi bi-heart text-[#886d52] text-xl"></i>
+                <span className="text-[#2A2D2E] text-[0.65rem] font-bold tracking-[0.2em] uppercase">01 — The Mission</span>
+              </div>
+              <h3 className="text-[#2A2D2E] text-[1.75rem] mb-4" style={{ fontFamily: '"Playfair Display", serif' }}>Why Structify Exists</h3>
+              <p className="text-[#717171] text-[0.9rem] leading-relaxed">
+                Data structures are the foundation of computer science, yet they're often taught in abstract ways that make them hard to grasp. Structify was born from the belief that visual learning and interactive exploration can make these concepts click for students and developers alike.
+              </p>
+            </div>
+
+            {/* The Journey */}
+            <div className="p-12 lg:p-16 flex flex-col gap-6 bg-white border border-[#EBEBEB] shadow-[0_4px_20px_rgba(0,0,0,0.02)] premium-hover">
+              <div className="flex gap-4 items-center mb-4">
+                <i className="bi bi-rocket-takeoff text-[#886d52] text-xl"></i>
+                <span className="text-[#2A2D2E] text-[0.65rem] font-bold tracking-[0.2em] uppercase">02 — The Journey</span>
+              </div>
+              <h3 className="text-[#2A2D2E] text-[1.75rem] mb-4" style={{ fontFamily: '"Playfair Display", serif' }}>From Idea to Platform</h3>
+              <p className="text-[#717171] text-[0.9rem] leading-relaxed">
+                Starting as a simple visualization tool for my own learning, Structify evolved into a comprehensive platform. Each data structure comes with its own specialized AI assistant, making personalized learning possible for thousands of users worldwide.
+              </p>
+            </div>
+
           </div>
         </div>
-        <div className='bg-[#050B17] border-[1px] border-gray-800 p-8 rounded-xl'>
-          <div className='flex gap-3 items-center'>
-            <div>
-              <span className='bi bi-rocket-takeoff text-3xl text-[#00D4FF] font-bold'></span>
-            </div>
-            <div className='text-white text-2xl font-semibold'>
-              The Journey
-            </div>
-          </div>
-          <div className='text-gray-400 mt-3'>
-            Starting as a simple visualization tool for my own learning, Structify evolved into a comprehensive platform. Each data structure comes with its own specialized AI assistant, making personalized learning possible for thousands of users worldwide.
-          </div>
+      </section>
+
+      {/* Connect CTA Section */}
+      <section className="bg-white py-32 px-8 flex flex-col items-center justify-center text-center border-t border-[#EBEBEB]">
+        <div className="text-[#E0E0E0] text-[1.15rem] font-sans tracking-[0.2em] mb-10 select-none">
+          ✦
         </div>
-      </div>
-      <div className='mt-16 flex justify-center pb-16'>
-        <div className='bg-[#050B17] w-[72%] border-[1px] border-gray-800 rounded-lg'>
-          <div className='text-white text-2xl font-bold mt-8 text-center'>
-            Let's Connect!
-          </div>
-          <div className='flex justify-center mt-5'>
-            <div className='text-gray-400 w-[75%] text-center'>
-              Have questions about data structures? Want to contribute to Structify? Or just want to chat about technology and education? I'd love to hear from you!
-            </div>
-          </div>
-          <div className='flex justify-center my-6'>
-            <Link to="/contact">
-              <button className='bg-[#00D4FF] px-10 py-1 rounded-lg cursor-pointer hover:bg-[#00bbe0]'>
-                <span className='bi bi-heart text-lg font-semibold'> Get in Touch</span>
-              </button>
-            </Link>
-          </div>
-        </div>
-      </div>
+        <h2 className="text-[#2A2D2E] text-3xl sm:text-4xl lg:text-[2.65rem] italic max-w-[700px] mx-auto mb-6" style={{ fontFamily: '"Cormorant Garamond", serif', lineHeight: '1.3' }}>
+          Let's build something extraordinary together.
+        </h2>
+        <p className="text-[#8C8C8C] text-[0.9rem] max-w-[480px] mb-12 leading-relaxed">
+          Have questions about data structures? Want to contribute to Structify? Or just want to chat about technology and education? I'd love to hear from you.
+        </p>
+        <Link to="/contact">
+          <button className="bg-[#5f5e5e] text-[0.65rem] font-bold tracking-[0.15em] uppercase px-12 py-5 hover:bg-[#4a4949] transition-colors border-none cursor-pointer" style={{ color: '#fff' }}>
+            Get in Touch
+          </button>
+        </Link>
+      </section>
+
       <Footer />
     </div>
   )

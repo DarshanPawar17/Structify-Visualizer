@@ -96,3 +96,13 @@ section, .mono-section {
 .animate-blur-reveal {
   animation: blurReveal 1.2s cubic-bezier(0.22, 1, 0.36, 1) forwards;
 }
+
+/* Premium Card Hover Utility */
+.premium-hover {
+  transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+}
+
+.premium-hover:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 12px 40px rgba(45, 52, 53, 0.12) !important;
+}
