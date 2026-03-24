@@ -19,6 +19,8 @@ import MinHeapVisualizer from "./Pages/MinHeapVisualizer";
 import AvlTreeVisualizer from "./Pages/AvlTreeVisualizer";
 import PageTransition from "./components/PageTransition";
 import ErrorBoundary from "./components/ui/ErrorBoundary";
+import SignIn from "./Pages/SignIn";
+import SignUp from "./Pages/SignUp";
 
 const App = () => {
   return (
@@ -43,6 +45,8 @@ const App = () => {
             <Route path="/visualization/MaxHeap" element={<MaxHeapVisualizer />} />
             <Route path="/visualization/MinHeap" element={<MinHeapVisualizer />} />
             <Route path="/visualization/AVLTree" element={<AvlTreeVisualizer />} />
+            <Route path="/signin" element={<SignIn />} />
+            <Route path="/signup" element={<SignUp />} />
             {/* fallback for invalid routes */}
             <Route path="*" element={<NotFound />} />
           </Routes>
